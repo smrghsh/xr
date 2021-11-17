@@ -28,8 +28,8 @@ export default class Stars {
         // }
         console.log()
         for(let i = 0; i < count * 3; i+=3){
-            let a = 10
-            let b = 25
+            let a = 5
+            let b = 30
             let distance = ((Math.random()*(b-a)) + a)
             // let rot1 = Math.random()*(Math.PI)
             let rot1 = Math.acos((2*Math.random())-1.0)
