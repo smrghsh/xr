@@ -19,14 +19,24 @@ export default class Stars {
         // for(let i = 0; i < count * 3; i++){
         //     positions[i] = (Math.random() - 0.5) * 10
         // }
-        function starposition(a,b){
-            return ((Math.random() > 0.5)? 1 : -1) * ( (Math.random()*(b-a)) + a)
-        }
+        // function starposition(a,b){
+        //     let r = Math.random()
+        //     let r1 = Math.random()
+        //     let r2 = Math.random()
+
+        //     return ((Math.random() > 0.5)? 1 : -1) * ( (Math.random()*(b-a)) + a)
+        // }
         console.log()
         for(let i = 0; i < count * 3; i+=3){
-            positions[i] = starposition(2,30)
-            positions[i+1] = starposition(2,30)
-            positions[i+2] = starposition(2,30)
+            let a = 5
+            let b = 30
+            let distance = ((Math.random()*(b-a)) + a)
+            // let rot1 = Math.random()*(Math.PI)
+            let rot1 = Math.acos((2*Math.random())-1.0)
+            let rot2 = Math.random()*(2*Math.PI)
+            positions[i] = Math.sin(rot1)*Math.cos(rot2)*distance
+            positions[i+1] = Math.sin(rot1)*Math.sin(rot2)*distance
+            positions[i+2] = Math.cos(rot1)*distance
         }
         particlesGeometry.setAttribute('position',new THREE.BufferAttribute(positions,3))
         particlesGeometry.setAttribute('color',new THREE.BufferAttribute(color,3))
