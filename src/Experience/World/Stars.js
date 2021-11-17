@@ -28,17 +28,15 @@ export default class Stars {
         // }
         console.log()
         for(let i = 0; i < count * 3; i+=3){
-            let a = 10
-            let b = 30
-            let r = Math.random()
-            let r1 = Math.random()
-            let r2 = Math.random()
-            let distance = ((r*(b-a)) + a)
-            let rot1 = r1*2*Math.PI
-            let rot2 = r2*2*Math.PI
-            positions[i] = Math.cos(rot1)*Math.cos(rot2)*distance
-            positions[i+1] = Math.sin(rot1)*Math.cos(rot2)*distance
-            positions[i+2] = Math.sin(rot2)*distance
+            let a = 14
+            let b = 15
+            let distance = ((Math.random()*(b-a)) + a)
+            distance = 15
+            let rot1 = Math.random()*(Math.PI)
+            let rot2 = Math.random()*(Math.PI)
+            positions[i] = Math.sin(rot1)*Math.cos(rot2)*distance
+            positions[i+1] = Math.sin(rot1)*Math.sin(rot2)*distance
+            positions[i+2] = Math.cos(rot1)*distance
         }
         particlesGeometry.setAttribute('position',new THREE.BufferAttribute(positions,3))
         particlesGeometry.setAttribute('color',new THREE.BufferAttribute(color,3))
