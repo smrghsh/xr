@@ -13,12 +13,12 @@ export default class Controllers
         this.renderer = this.experience.renderer.instance
         
         
-        this.controller1 = this.xr.getController( 0 );
+        this.controller1 = this.renderer.instancexr.getController( 0 );
         // this.controller1.addEventListener( 'selectstart', onSelectStart );
         // this.controller1.addEventListener( 'selectend', onSelectEnd );
         this.scene.add( this.controller1 );
         
-        this.controller2 = this.xr.getController( 1 );
+        this.controller2 = this.renderer.instance.xr.getController( 1 );
         // this.controller2.addEventListener( 'selectstart', onSelectStart );
         // this.controller2.addEventListener( 'selectend', onSelectEnd );
         this.scene.add( this.controller2 );
@@ -27,11 +27,11 @@ export default class Controllers
 
         this.controllerModelFactory = new XRControllerModelFactory()
 
-        this.controllerGrip1 = this.renderer.xr.getControllerGrip( 0 )
+        this.controllerGrip1 = this.renderer.instance.xr.getControllerGrip( 0 )
         this.controllerGrip1.add( this.controllerModelFactory.createControllerModel( this.controllerGrip1 ) )
         this.scene.add( this.controllerGrip1 )
 
-        this.controllerGrip2 = this.renderer.xr.getControllerGrip( 1 )
+        this.controllerGrip2 = this.renderer.instance.xr.getControllerGrip( 1 )
         this.controllerGrip2.add( this.controllerModelFactory.createControllerModel( this.controllerGrip2 ) )
         this.scene.add( this.controllerGrip2 )
     }
