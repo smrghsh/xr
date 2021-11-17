@@ -13,7 +13,7 @@ export default class Controllers
         this.renderer = this.experience.renderer.instance
         
         
-        this.controller1 = this.renderer.instancexr.getController( 0 );
+        this.controller1 = this.renderer.instance.xr.getController( 0 );
         // this.controller1.addEventListener( 'selectstart', onSelectStart );
         // this.controller1.addEventListener( 'selectend', onSelectEnd );
         this.scene.add( this.controller1 );
