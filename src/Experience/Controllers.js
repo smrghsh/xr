@@ -13,6 +13,17 @@ export default class Controllers
         this.renderer = this.experience.renderer.instance
         
         
+        this.controller1 = this.xr.getController( 0 );
+        // this.controller1.addEventListener( 'selectstart', onSelectStart );
+        // this.controller1.addEventListener( 'selectend', onSelectEnd );
+        this.scene.add( this.controller1 );
+        
+        this.controller2 = this.xr.getController( 1 );
+        // this.controller2.addEventListener( 'selectstart', onSelectStart );
+        // this.controller2.addEventListener( 'selectend', onSelectEnd );
+        this.scene.add( this.controller2 );
+        
+        
 
         this.controllerModelFactory = new XRControllerModelFactory()
 
