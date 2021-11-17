@@ -28,12 +28,12 @@ export default class Stars {
         // }
         console.log()
         for(let i = 0; i < count * 3; i+=3){
-            let a = 14
-            let b = 15
+            let a = 10
+            let b = 25
             let distance = ((Math.random()*(b-a)) + a)
-            distance = 15
-            let rot1 = Math.random()*(Math.PI)
-            let rot2 = Math.random()*(Math.PI)
+            // let rot1 = Math.random()*(Math.PI)
+            let rot1 = Math.acos((2*Math.random())-1.0)
+            let rot2 = Math.random()*(2*Math.PI)
             positions[i] = Math.sin(rot1)*Math.cos(rot2)*distance
             positions[i+1] = Math.sin(rot1)*Math.sin(rot2)*distance
             positions[i+2] = Math.cos(rot1)*distance
