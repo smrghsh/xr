@@ -9,6 +9,8 @@ import World from './World/World.js'
 
 import sources from './sources.js'
 import { VRButton } from 'three/examples/jsm/webxr/VRButton.js'
+import { Controller } from 'lil-gui'
+import Controllers from './Controllers.js'
 
 let instance = null
 
@@ -49,6 +51,18 @@ export default class Experience
         this.world = new World()
         this.camera = new Camera()
         this.renderer = new Renderer()
+
+        this.renderer.instance.xr.enabled = true;
+        document.body.appendChild( VRButton.createButton( this.renderer.instance ) );
+        this.renderer.instance.setAnimationLoop( ()=> {
+            // tick();
+            this.renderer.instance.render( this.scene, this.camera.instance );
+        });
+
+
+        this.controllers = new Controllers()
+
+        
         this.raycaster = new THREE.Raycaster()
         this.mouse = new THREE.Vector2()
         this.INTERSECTED = null
@@ -75,12 +89,7 @@ export default class Experience
             this.update()
         })
         
-        this.renderer.instance.xr.enabled = true;
-        document.body.appendChild( VRButton.createButton( this.renderer.instance ) );
-        this.renderer.instance.setAnimationLoop( ()=> {
-            // tick();
-            this.renderer.instance.render( this.scene, this.camera.instance );
-        });
+        
 
     }
 
