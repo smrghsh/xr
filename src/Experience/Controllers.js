@@ -10,7 +10,7 @@ export default class Controllers
         this.canvas = this.experience.canvas
         this.sizes = this.experience.sizes
         this.scene = this.experience.scene
-        this.renderer = this.experience.renderer.instance
+        this.renderer = this.experience.renderer
         
         
         this.controller1 = this.renderer.instance.xr.getController( 0 );
