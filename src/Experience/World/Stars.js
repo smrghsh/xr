@@ -24,9 +24,9 @@ export default class Stars {
         }
         console.log()
         for(let i = 0; i < count * 3; i+=3){
-            positions[i] = starposition(4,30)
-            positions[i+1] = starposition(4,30)
-            positions[i+2] = starposition(4,30)
+            positions[i] = starposition(2,30)
+            positions[i+1] = starposition(2,30)
+            positions[i+2] = starposition(2,30)
         }
         particlesGeometry.setAttribute('position',new THREE.BufferAttribute(positions,3))
         particlesGeometry.setAttribute('color',new THREE.BufferAttribute(color,3))
