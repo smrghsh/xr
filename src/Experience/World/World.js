@@ -24,9 +24,5 @@ export default class World
         })
     }
     update() {
-
-        if(this.stars){
-            this.stars.update()
-        }
     }
 }

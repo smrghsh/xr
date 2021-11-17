@@ -48,6 +48,6 @@ export default class Stars {
         this.scene.add(this.particles)
     }
     update(){
-        this.particles.rotation.x += 0.02
+        // this.particles.rotation.x += 0.02
     }
 }
