@@ -204,6 +204,27 @@ export default class Spectra{
         this.hzLabel.add(minHZ)
 
         this.group.add(this.hzLabel)
+        
+        
+        const filenameGeo = new THREE.TextGeometry( 'sound: common_voice_en_10.mp3 \nsize: 17.2KB', {
+            font: this.font,
+            size: 50,
+            height: 10,
+            curveSegments: 12,
+            bevelEnabled: true,
+            bevelThickness: 0.5,
+            bevelSize: 1,
+            bevelOffset: 1,
+            bevelSegments: 5
+        } );
+        const filenameTitle = new THREE.Mesh(filenameGeo,this.white)
+        filenameTitle.scale.x = 0.005
+        filenameTitle.scale.y = 0.005
+        filenameTitle.scale.z = 0.005
+        filenameTitle.position.y = this.waveHeight + 1.1
+        filenameTitle.position.z -= this.depth
+        filenameTitle.position.x -= 1.6
+        this.group.add(filenameTitle)
         this.scene.add(this.group)
     }
 }
