@@ -24,7 +24,7 @@ export default class Spectra{
         this.graphHeight = 0.9
         this.group = new THREE.Group()
         this.white = new THREE.MeshBasicMaterial({color: 'white'})
-        this.waveGeometry = new THREE.PlaneGeometry(this.width,this.graphHeight)
+        this.waveGeometry = new THREE.PlaneGeometry(this.width,this.graphHeight,300,300)
 
         this.waveMaterial = new THREE.MeshBasicMaterial({map: this.waveImage, side: THREE.DoubleSide})
         this.invertMaterial = new THREE.ShaderMaterial({
