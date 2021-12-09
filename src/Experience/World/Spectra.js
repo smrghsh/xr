@@ -1,6 +1,9 @@
 import * as THREE from 'three'
 import Experience from '../Experience.js'
-
+import invertVertexShader from '../../shaders/invert/vertex.glsl'
+import invertFragmentShader from '../../shaders/invert/fragment.glsl'
+import heatmapVertexShader from '../../shaders/heatmap/vertex.glsl'
+import heatmapFragmentShader from '../../shaders/heatmap/fragment.glsl'
 
 export default class Spectra{
     constructor(){
@@ -24,13 +27,27 @@ export default class Spectra{
         this.waveGeometry = new THREE.PlaneGeometry(this.width,this.graphHeight)
 
         this.waveMaterial = new THREE.MeshBasicMaterial({map: this.waveImage, side: THREE.DoubleSide})
-        this.waveMesh = new THREE.Mesh(this.waveGeometry, this.waveMaterial)
+        this.invertMaterial = new THREE.ShaderMaterial({
+            uniforms: {
+                texture1: { type: "t", value: this.waveImage }
+            },
+            vertexShader: invertVertexShader,
+            fragmentShader: invertFragmentShader
+        })
+        this.waveMesh = new THREE.Mesh(this.waveGeometry, this.invertMaterial)
         this.waveMesh.position.y += this.waveHeight
         this.waveMesh.scale.x *= this.widthScale 
         this.waveMesh.position.z -= this.depth
 
         this.spectrogramMaterial = new THREE.MeshBasicMaterial({map: this.spectrogramImage, side: THREE.DoubleSide})
-        this.spectrogramMesh = new THREE.Mesh(this.waveGeometry, this.spectrogramMaterial)
+        this.heatmapMaterial = new THREE.ShaderMaterial({
+            uniforms: {
+                texture1: { type: "t", value: this.spectrogramImage }
+            },
+            vertexShader: heatmapVertexShader,
+            fragmentShader: heatmapFragmentShader
+        })
+        this.spectrogramMesh = new THREE.Mesh(this.waveGeometry, this.heatmapMaterial)
         this.spectrogramMesh.position.y += this.spectrogramHeight
         this.spectrogramMesh.scale.x *= this.widthScale 
         this.spectrogramMesh.position.z -= this.depth
