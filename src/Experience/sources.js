@@ -49,4 +49,9 @@ export default [
         type: 'texture',
         path: 'spectra/spectrogram.jpg'
     },   
+    {
+        name: 'font',
+        type: 'font',
+        path: 'helvetiker_regular.typeface.json'
+    }
 ]
