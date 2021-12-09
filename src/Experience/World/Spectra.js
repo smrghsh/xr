@@ -15,9 +15,9 @@ export default class Spectra{
         this.width = 1.564
         this.depth = 3
         this.widthScale = 2
-        this.waveHeight = 3.5
-        this.spectrogramHeight = 2
-        this.graphTitleBottomSpace = 0.1
+        this.waveHeight = 2.8
+        this.spectrogramHeight = 1.5
+        this.graphTitleBottomSpace = 0.08
         this.graphHeight = 0.9
         this.group = new THREE.Group()
         this.white = new THREE.MeshBasicMaterial({color: 'white'})
@@ -218,10 +218,10 @@ export default class Spectra{
             bevelSegments: 5
         } );
         const filenameTitle = new THREE.Mesh(filenameGeo,this.white)
-        filenameTitle.scale.x = 0.006
-        filenameTitle.scale.y = 0.006
-        filenameTitle.scale.z = 0.006
-        filenameTitle.position.y = this.waveHeight + 1.1
+        filenameTitle.scale.x = 0.0055
+        filenameTitle.scale.y = 0.0055
+        filenameTitle.scale.z = 0.0055
+        filenameTitle.position.y = this.waveHeight + 0.85
         filenameTitle.position.z -= this.depth
         filenameTitle.position.x -= 1.6
         this.group.add(filenameTitle)
@@ -241,7 +241,7 @@ export default class Spectra{
         metadataTitle.scale.x = 0.003
         metadataTitle.scale.y = 0.003
         metadataTitle.scale.z = 0.003
-        metadataTitle.position.y = this.waveHeight + 1.1
+        metadataTitle.position.y = this.waveHeight + 0.5
         metadataTitle.position.z -= this.depth - 2
         metadataTitle.position.x -= 4
         metadataTitle.rotation.y += Math.PI/4
@@ -263,7 +263,7 @@ export default class Spectra{
         acousticTitle.scale.x = 0.003
         acousticTitle.scale.y = 0.003
         acousticTitle.scale.z = 0.003
-        acousticTitle.position.y = this.spectrogramHeight + 1.1
+        acousticTitle.position.y = this.spectrogramHeight + 0.5
         acousticTitle.position.z -= this.depth - 2
         acousticTitle.position.x -= 4
         acousticTitle.rotation.y += Math.PI/4
@@ -287,7 +287,7 @@ export default class Spectra{
        wordsTitle.scale.z = 0.003
        wordsTitle.position.x -= this.leftAlign + this.width/2 
        wordsTitle.position.z -= 3
-       wordsTitle.position.y = 1.2
+       wordsTitle.position.y = .7
         this.group.add(wordsTitle)
         this.scene.add(this.group)
     }
