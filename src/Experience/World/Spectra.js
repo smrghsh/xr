@@ -15,8 +15,8 @@ export default class Spectra{
         this.width = 1.564
         this.depth = 3
         this.widthScale = 2
-        this.waveHeight = 4
-        this.spectrogramHeight = 2.5
+        this.waveHeight = 3.5
+        this.spectrogramHeight = 2
         this.graphTitleBottomSpace = 0.1
         this.graphHeight = 0.7
         this.group = new THREE.Group()
@@ -164,22 +164,42 @@ export default class Spectra{
             bevelOffset: 1,
             bevelSegments: 5
         } );
+        const hzTitleGeo = new THREE.TextGeometry( 'frequency (Hz)', {
+            font: this.font,
+            size: 50,
+            height: 10,
+            curveSegments: 12,
+            bevelEnabled: true,
+            bevelThickness: 0.5,
+            bevelSize: 1,
+            bevelOffset: 1,
+            bevelSegments: 5
+        } );
         const maxHZ = new THREE.Mesh(maxHZGeometry,this.white)
-        maxHZ.scale.x = 0.001
-        maxHZ.scale.y = 0.001
-        maxHZ.scale.z = 0.001
+        maxHZ.scale.x = 0.00085
+        maxHZ.scale.y = 0.00085
+        maxHZ.scale.z = 0.00085
         maxHZ.position.y = this.spectrogramHeight + this.graphHeight/2 - 0.02
-        maxHZ.position.x -= this.width + 0.2
+        maxHZ.position.x -= this.width + 0.18
         maxHZ.position.z -= this.depth
         this.hzLabel.add(maxHZ)
 
+        const hzTitle = new THREE.Mesh(hzTitleGeo,this.white)
+        hzTitle.scale.x = 0.0008
+        hzTitle.scale.y = 0.0008
+        hzTitle.scale.z = 0.0008
+        hzTitle.position.y = this.spectrogramHeight - 0.02
+        hzTitle.position.x -= this.width + 0.2 + 0.25
+        hzTitle.position.z -= this.depth
+        this.hzLabel.add(hzTitle)
+
         
         const minHZ = new THREE.Mesh(minHZGeometry,this.white)
-        minHZ.scale.x = 0.001
-        minHZ.scale.y = 0.001
-        minHZ.scale.z = 0.001
+        minHZ.scale.x = 0.00085
+        minHZ.scale.y = 0.00085
+        minHZ.scale.z = 0.00085
         minHZ.position.y = this.spectrogramHeight - this.graphHeight/2 - 0.02
-        minHZ.position.x -= this.width + 0.1
+        minHZ.position.x -= this.width + 0.08
         minHZ.position.z -= this.depth
         this.hzLabel.add(minHZ)
 
