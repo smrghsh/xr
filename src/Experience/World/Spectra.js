@@ -13,32 +13,34 @@ export default class Spectra{
         console.log(this.resources)
         console.log(this.spectrogramImage)
         this.width = 1.564
+        this.depth = 3
         this.widthScale = 2
-        this.waveHeight = 3
-        this.spectrogramHeight = 2
-        this.graphHeight = 0.8
+        this.waveHeight = 4
+        this.spectrogramHeight = 2.5
+        this.graphTitleBottomSpace = 0.1
+        this.graphHeight = 0.7
         this.group = new THREE.Group()
-
+        this.white = new THREE.MeshBasicMaterial({color: 'white'})
         this.waveGeometry = new THREE.PlaneGeometry(this.width,this.graphHeight)
 
         this.waveMaterial = new THREE.MeshBasicMaterial({map: this.waveImage, side: THREE.DoubleSide})
         this.waveMesh = new THREE.Mesh(this.waveGeometry, this.waveMaterial)
         this.waveMesh.position.y += this.waveHeight
         this.waveMesh.scale.x *= this.widthScale 
-        this.waveMesh.position.z -=3
+        this.waveMesh.position.z -= this.depth
 
         this.spectrogramMaterial = new THREE.MeshBasicMaterial({map: this.spectrogramImage, side: THREE.DoubleSide})
         this.spectrogramMesh = new THREE.Mesh(this.waveGeometry, this.spectrogramMaterial)
         this.spectrogramMesh.position.y += this.spectrogramHeight
         this.spectrogramMesh.scale.x *= this.widthScale 
-        this.spectrogramMesh.position.z -= 3
+        this.spectrogramMesh.position.z -= this.depth
         this.group.add(this.waveMesh)
         this.group.add(this.spectrogramMesh)
 
 
         this.font = this.resources.items.font
         console.log(this.font)
-        const waveTitleGeometry = new THREE.TextGeometry( 'Waveform', {
+        const waveTitleGeometry = new THREE.TextGeometry( 'waveform', {
             font: this.font,
             size: 50,
             height: 10,
@@ -49,14 +51,139 @@ export default class Spectra{
             bevelOffset: 1,
             bevelSegments: 5
         } );
+        const spectrogramTitleGeometry = new THREE.TextGeometry( 'spectrogram', {
+            font: this.font,
+            size: 50,
+            height: 10,
+            curveSegments: 12,
+            bevelEnabled: true,
+            bevelThickness: 0.5,
+            bevelSize: 1,
+            bevelOffset: 1,
+            bevelSegments: 5
+        } );
+        this.leftAlign = 0.8
         const waveTitle = new THREE.Mesh(waveTitleGeometry,new THREE.MeshBasicMaterial({color: 'white'}))
         waveTitle.scale.x = 0.003
         waveTitle.scale.y = 0.003
         waveTitle.scale.z = 0.003
-        waveTitle.position.x -= 2 + this.width/2 
+        waveTitle.position.x -= this.leftAlign + this.width/2 
         waveTitle.position.z -= 3
-        waveTitle.position.y = this.waveHeight + this.graphHeight/2
-        this.scene.add(waveTitle)
+        waveTitle.position.y = this.waveHeight + this.graphTitleBottomSpace+ this.graphHeight/2
+
+
+
+        this.group.add(waveTitle)
+        const spectrogramTitle = new THREE.Mesh(spectrogramTitleGeometry,new THREE.MeshBasicMaterial({color: 'white'}))
+        spectrogramTitle.scale.x = 0.003
+        spectrogramTitle.scale.y = 0.003
+        spectrogramTitle.scale.z = 0.003
+        spectrogramTitle.position.x -= this.leftAlign + this.width/2 
+        spectrogramTitle.position.z -= 3
+        spectrogramTitle.position.y = this.spectrogramHeight + this.graphTitleBottomSpace+ this.graphHeight/2
+        this.group.add(spectrogramTitle)
+
+
+
+        this.timeLabel = new THREE.Group()
+        for(var i = 0.1; i < this.width*2; i+= 0.1){
+            const tickGeo = new THREE.BoxGeometry(0.01,0.02,0.02)
+            const white = new THREE.MeshBasicMaterial({color:'white'})
+            const tick = new THREE.Mesh(tickGeo,white)
+            tick.position.x = (-1 * (this.leftAlign + this.width/2)) + i
+            tick.position.z -= this.depth
+            tick.position.y = this.waveHeight - this.graphHeight/2
+            const tick2 = new THREE.Mesh(tickGeo,white)
+            tick2.position.x = (-1 * (this.leftAlign + this.width/2)) + i
+            tick2.position.z -= this.depth
+            tick2.position.y = this.spectrogramHeight - this.graphHeight/2
+            this.timeLabel.add(tick)
+            this.timeLabel.add(tick2)
+        }
+        const timeTitleGeometry = new THREE.TextGeometry( 'time (s)', {
+            font: this.font,
+            size: 50,
+            height: 10,
+            curveSegments: 12,
+            bevelEnabled: true,
+            bevelThickness: 0.5,
+            bevelSize: 1,
+            bevelOffset: 1,
+            bevelSegments: 5
+        } );
+        const timeTitle = new THREE.Mesh(timeTitleGeometry,this.white)
+        timeTitle.scale.x = 0.001
+        timeTitle.scale.y = 0.001
+        timeTitle.scale.z = 0.001
+        timeTitle.position.y = this.waveHeight - this.graphHeight/2 - 0.1
+        timeTitle.position.x -= 0.1
+        timeTitle.position.z -= this.depth
+        this.timeLabel.add(timeTitle)
+
+        const timeTitle2 = new THREE.Mesh(timeTitleGeometry,this.white)
+        timeTitle2.scale.x = 0.001
+        timeTitle2.scale.y = 0.001
+        timeTitle2.scale.z = 0.001
+        timeTitle2.position.y = this.spectrogramHeight - this.graphHeight/2 - 0.1
+        timeTitle2.position.x -= 0.1
+        timeTitle2.position.z -= this.depth
+        this.timeLabel.add(timeTitle2)
+
+        this.group.add(this.timeLabel)
+
+
+        this.hzLabel = new THREE.Group()
+
+        for(var i = 0; i < this.graphHeight; i+= this.graphHeight/10){
+            const hTickGeo = new THREE.BoxGeometry(0.02,0.01,0.02)
+            const hTick = new THREE.Mesh(hTickGeo, this.white)
+            hTick.position.x =  (-1 * (this.leftAlign + this.width/2))
+            hTick.position.z -= this.depth
+            hTick.position.y = this.spectrogramHeight - this.graphHeight/2 + i
+            this.hzLabel.add(hTick)
+        }
+        const maxHZGeometry = new THREE.TextGeometry( '5000', {
+            font: this.font,
+            size: 50,
+            height: 10,
+            curveSegments: 12,
+            bevelEnabled: true,
+            bevelThickness: 0.5,
+            bevelSize: 1,
+            bevelOffset: 1,
+            bevelSegments: 5
+        } );
+        const minHZGeometry = new THREE.TextGeometry( '0', {
+            font: this.font,
+            size: 50,
+            height: 10,
+            curveSegments: 12,
+            bevelEnabled: true,
+            bevelThickness: 0.5,
+            bevelSize: 1,
+            bevelOffset: 1,
+            bevelSegments: 5
+        } );
+        const maxHZ = new THREE.Mesh(maxHZGeometry,this.white)
+        maxHZ.scale.x = 0.001
+        maxHZ.scale.y = 0.001
+        maxHZ.scale.z = 0.001
+        maxHZ.position.y = this.spectrogramHeight + this.graphHeight/2 - 0.02
+        maxHZ.position.x -= this.width + 0.2
+        maxHZ.position.z -= this.depth
+        this.hzLabel.add(maxHZ)
+
+        
+        const minHZ = new THREE.Mesh(minHZGeometry,this.white)
+        minHZ.scale.x = 0.001
+        minHZ.scale.y = 0.001
+        minHZ.scale.z = 0.001
+        minHZ.position.y = this.spectrogramHeight - this.graphHeight/2 - 0.02
+        minHZ.position.x -= this.width + 0.1
+        minHZ.position.z -= this.depth
+        this.hzLabel.add(minHZ)
+
+        this.group.add(this.hzLabel)
         this.scene.add(this.group)
     }
 }

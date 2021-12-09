@@ -38,9 +38,7 @@ export default class Circles{
             // if(child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial)
             if(child instanceof THREE.Mesh)
             {
-                child.scale.z =child.scale.z * Math.sin(child.radius * (Math.PI/this.maxRadius) + time / 1000);
-                child.scale.y =child.scale.y * Math.sin(child.radius * (Math.PI/this.maxRadius) + time / 1000);
-                child.scale.x =child.scale.x * Math.sin(child.radius * (Math.PI/this.maxRadius) + time / 1000);
+                child.position.z = Math.sin(child.radius * (Math.PI/this.maxRadius) + time / 1000);
             }
         })
     }
