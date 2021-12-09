@@ -18,7 +18,7 @@ export default class Spectra{
         this.waveHeight = 3.5
         this.spectrogramHeight = 2
         this.graphTitleBottomSpace = 0.1
-        this.graphHeight = 0.7
+        this.graphHeight = 0.9
         this.group = new THREE.Group()
         this.white = new THREE.MeshBasicMaterial({color: 'white'})
         this.waveGeometry = new THREE.PlaneGeometry(this.width,this.graphHeight)
@@ -206,7 +206,7 @@ export default class Spectra{
         this.group.add(this.hzLabel)
         
         
-        const filenameGeo = new THREE.TextGeometry( 'sound: common_voice_en_10.mp3 \nsize: 17.2KB', {
+        const filenameGeo = new THREE.TextGeometry( 'common_voice_en_10.mp3', {
             font: this.font,
             size: 50,
             height: 10,
@@ -218,13 +218,77 @@ export default class Spectra{
             bevelSegments: 5
         } );
         const filenameTitle = new THREE.Mesh(filenameGeo,this.white)
-        filenameTitle.scale.x = 0.005
-        filenameTitle.scale.y = 0.005
-        filenameTitle.scale.z = 0.005
+        filenameTitle.scale.x = 0.006
+        filenameTitle.scale.y = 0.006
+        filenameTitle.scale.z = 0.006
         filenameTitle.position.y = this.waveHeight + 1.1
         filenameTitle.position.z -= this.depth
         filenameTitle.position.x -= 1.6
         this.group.add(filenameTitle)
+
+        const metadataGeo = new THREE.TextGeometry( 'METADATA\nsize: 17.2KB\nsource: Mozilla Common Voice\ngender: male', {
+            font: this.font,
+            size: 50,
+            height: 10,
+            curveSegments: 12,
+            bevelEnabled: true,
+            bevelThickness: 0.5,
+            bevelSize: 1,
+            bevelOffset: 1,
+            bevelSegments: 5
+        } );
+        const metadataTitle = new THREE.Mesh(metadataGeo,this.white)
+        metadataTitle.scale.x = 0.003
+        metadataTitle.scale.y = 0.003
+        metadataTitle.scale.z = 0.003
+        metadataTitle.position.y = this.waveHeight + 1.1
+        metadataTitle.position.z -= this.depth - 2
+        metadataTitle.position.x -= 4
+        metadataTitle.rotation.y += Math.PI/4
+        this.group.add(metadataTitle)
+        
+        const acousticPropString = "ACOUSTIC PROPERTIES\npitch mean: 128.12Hz\npitch max: 235.64Hz\npitch min: 109Hz\nF1 mean: 612.75 Hz\nF2 mean: 1657.43Hz"
+        const acousticGeo = new THREE.TextGeometry( acousticPropString, {
+            font: this.font,
+            size: 50,
+            height: 10,
+            curveSegments: 12,
+            bevelEnabled: true,
+            bevelThickness: 0.5,
+            bevelSize: 1,
+            bevelOffset: 1,
+            bevelSegments: 5
+        } );
+        const acousticTitle = new THREE.Mesh(acousticGeo,this.white)
+        acousticTitle.scale.x = 0.003
+        acousticTitle.scale.y = 0.003
+        acousticTitle.scale.z = 0.003
+        acousticTitle.position.y = this.spectrogramHeight + 1.1
+        acousticTitle.position.z -= this.depth - 2
+        acousticTitle.position.x -= 4
+        acousticTitle.rotation.y += Math.PI/4
+        this.group.add(acousticTitle)
+        
+        const wordsPropString = "words (en)\n\"The boy looked out at the horizon\""
+        const wordsGeo = new THREE.TextGeometry( wordsPropString, {
+            font: this.font,
+            size: 50,
+            height: 10,
+            curveSegments: 12,
+            bevelEnabled: true,
+            bevelThickness: 0.5,
+            bevelSize: 1,
+            bevelOffset: 1,
+            bevelSegments: 5
+        } );
+        const wordsTitle = new THREE.Mesh(wordsGeo,this.white)
+       wordsTitle.scale.x = 0.003
+       wordsTitle.scale.y = 0.003
+       wordsTitle.scale.z = 0.003
+       wordsTitle.position.x -= this.leftAlign + this.width/2 
+       wordsTitle.position.z -= 3
+       wordsTitle.position.y = 1.2
+        this.group.add(wordsTitle)
         this.scene.add(this.group)
     }
 }
