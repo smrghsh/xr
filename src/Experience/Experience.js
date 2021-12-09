@@ -102,7 +102,7 @@ export default class Experience
         // this.renderer.update()
         this.world.update()
         // this.world.circles.undulate(this.time.elapsed)
-        this.world.hypercube.wub(this.time.elapsed)
+        // this.world.hypercube.wub(this.time.elapsed)
         //https://github.com/mrdoob/three.js/blob/master/examples/webgl_interactive_cubes.html
         
         //change this to be controller if controller is active

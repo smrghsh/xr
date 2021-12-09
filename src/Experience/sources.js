@@ -38,5 +38,15 @@ export default [
         name: 'sushiModel',
         type: 'gltfModel',
         path: 'models/sushi.glb'
-    }   
+    } ,
+    {
+        name: 'wave1',
+        type: 'texture',
+        path: 'spectra/wave.png'
+    }, 
+    {
+        name: 'spectrogram1',
+        type: 'texture',
+        path: 'spectra/spectrogram.jpg'
+    },   
 ]
