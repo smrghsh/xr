@@ -47,4 +47,3 @@ export default class Hypercube {
 
 }
 
-// i think this is relevant to creating a custom model
