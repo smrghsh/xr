@@ -10,6 +10,7 @@ import sources from './sources.js'
 import { VRButton } from 'three/examples/jsm/webxr/VRButton.js'
 import Controllers from './Controllers.js'
 
+console.log('hello')
 let instance = null
 
 export default class Experience
@@ -25,26 +26,45 @@ export default class Experience
         this.debug = new Debug()
         this.sampleBoolean = true
         this.sampleNumber = 5
+
+        this.parameters = {
+            
+        }
+        this.material = new THREE.MeshBasicMaterial({color: 'red'})
+
         if(this.debug.active)
         {
             this.debugFolder = this.debug.ui.addFolder('experience')
-            const debugObject = {
+            this.debugObject = {
                 sampleBoolean: this.sampleBoolean,
-                sampleNumber: this.sampleNumber
+                sampleNumber: this.sampleNumber,
+                color: 0xff0000
             }
-            this.debugFolder.add(debugObject, 'sampleBoolean').onChange( value =>{
+            this.debugFolder.add(this.debugObject, 'sampleBoolean').onChange( value =>{
                 this.sampleBoolean = value
                 console.log(this.sampleBoolean)
             })
-            this.debugFolder.add(debugObject, 'sampleNumber').min(0.5).max(15).onChange( value =>{
+            this.debugFolder.add(this.debugObject, 'sampleNumber').min(0.5).max(15).onChange( value =>{
                 this.sampleNumber = value
                 console.log(this.sampleNumber)
             })
+            this.debugFolder.add(this.debugObject, 'color').onChange( () =>{
+                this.material.color.set(this.color)
+            })
         }
+
+      
         this.sizes = new Sizes()
         this.time = new Time()
         this.lastUpdated = this.time.current
         this.scene = new THREE.Scene()
+
+
+        this.geometry = new THREE.SphereGeometry(1, 32, 32)
+        
+        this.mesh = new THREE.Mesh(this.geometry, this.material)
+        this.scene.add(this.mesh)
+
         this.resources = new Resources(sources)
         this.world = new World()
         this.camera = new Camera()
