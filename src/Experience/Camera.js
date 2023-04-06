@@ -10,6 +10,7 @@ export default class Camera
         this.sizes = this.experience.sizes
         this.scene = this.experience.scene
         this.canvas = this.experience.canvas
+        console.log('camera started')
         this.setInstance()
         this.setOrbitControls()
     }
