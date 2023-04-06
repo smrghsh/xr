@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import Experience from '../Experience.js'
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 import invertVertexShader from '../../shaders/invert/vertex.glsl'
 import invertFragmentShader from '../../shaders/invert/fragment.glsl'
 import heatmapVertexShader from '../../shaders/heatmap/vertex.glsl'
@@ -57,7 +58,7 @@ export default class Spectra{
 
         this.font = this.resources.items.font
         console.log(this.font)
-        const waveTitleGeometry = new THREE.TextGeometry( 'waveform', {
+        const waveTitleGeometry = new TextGeometry( 'waveform', {
             font: this.font,
             size: 50,
             height: 10,
@@ -68,7 +69,7 @@ export default class Spectra{
             bevelOffset: 1,
             bevelSegments: 5
         } );
-        const spectrogramTitleGeometry = new THREE.TextGeometry( 'spectrogram', {
+        const spectrogramTitleGeometry = new TextGeometry( 'spectrogram', {
             font: this.font,
             size: 50,
             height: 10,
@@ -117,7 +118,7 @@ export default class Spectra{
             this.timeLabel.add(tick)
             this.timeLabel.add(tick2)
         }
-        const timeTitleGeometry = new THREE.TextGeometry( 'time (s)', {
+        const timeTitleGeometry = new TextGeometry( 'time (s)', {
             font: this.font,
             size: 50,
             height: 10,
@@ -159,7 +160,7 @@ export default class Spectra{
             hTick.position.y = this.spectrogramHeight - this.graphHeight/2 + i
             this.hzLabel.add(hTick)
         }
-        const maxHZGeometry = new THREE.TextGeometry( '5000', {
+        const maxHZGeometry = new TextGeometry( '5000', {
             font: this.font,
             size: 50,
             height: 10,
@@ -170,7 +171,7 @@ export default class Spectra{
             bevelOffset: 1,
             bevelSegments: 5
         } );
-        const minHZGeometry = new THREE.TextGeometry( '0', {
+        const minHZGeometry = new TextGeometry( '0', {
             font: this.font,
             size: 50,
             height: 10,
@@ -181,7 +182,7 @@ export default class Spectra{
             bevelOffset: 1,
             bevelSegments: 5
         } );
-        const hzTitleGeo = new THREE.TextGeometry( 'frequency (Hz)', {
+        const hzTitleGeo = new TextGeometry( 'frequency (Hz)', {
             font: this.font,
             size: 50,
             height: 10,
@@ -223,7 +224,7 @@ export default class Spectra{
         this.group.add(this.hzLabel)
         
         
-        const filenameGeo = new THREE.TextGeometry( 'common_voice_en_10.mp3', {
+        const filenameGeo = new TextGeometry( 'common_voice_en_10.mp3', {
             font: this.font,
             size: 50,
             height: 10,
@@ -243,7 +244,7 @@ export default class Spectra{
         filenameTitle.position.x -= 1.6
         this.group.add(filenameTitle)
 
-        const metadataGeo = new THREE.TextGeometry( 'METADATA\nsize: 17.2KB\nsource: Mozilla Common Voice\ngender: male', {
+        const metadataGeo = new TextGeometry( 'METADATA\nsize: 17.2KB\nsource: Mozilla Common Voice\ngender: male', {
             font: this.font,
             size: 50,
             height: 10,
@@ -265,7 +266,7 @@ export default class Spectra{
         this.group.add(metadataTitle)
         
         const acousticPropString = "ACOUSTIC PROPERTIES\npitch mean: 128.12Hz\npitch max: 235.64Hz\npitch min: 109Hz\nF1 mean: 612.75 Hz\nF2 mean: 1657.43Hz"
-        const acousticGeo = new THREE.TextGeometry( acousticPropString, {
+        const acousticGeo = new TextGeometry( acousticPropString, {
             font: this.font,
             size: 50,
             height: 10,
@@ -287,7 +288,7 @@ export default class Spectra{
         this.group.add(acousticTitle)
         
         const wordsPropString = "words (en)\n\"The boy looked out at the horizon\""
-        const wordsGeo = new THREE.TextGeometry( wordsPropString, {
+        const wordsGeo = new TextGeometry( wordsPropString, {
             font: this.font,
             size: 50,
             height: 10,
