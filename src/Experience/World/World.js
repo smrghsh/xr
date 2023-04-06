@@ -1,13 +1,9 @@
 import * as THREE from 'three'
 import Experience from '../Experience.js'
-import Circles from './Circles.js'
 import Environment from './Environment.js'
 import Floor from './Floor.js'
-import Hypercube from './Hypercube.js'
 import Spectra from './Spectra.js'
 import Stars from './Stars.js'
-// import Sushi from './Sushi.js'
-// import Test from './Test.js'
 
 export default class World
 {
