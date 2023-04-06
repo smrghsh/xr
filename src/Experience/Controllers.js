@@ -31,7 +31,20 @@ export default class Controllers
         // this.controller2.addEventListener( 'selectend', onSelectEnd );
         this.scene.add( this.controller2 );
         
+        //imported from https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getGamepads
+        this.controller1.addEventListener("gamepadconnected", (e) => {
+            console.log(
+                "Gamepad connected at index %d: %s. %d buttons, %d axes.",
+                e.gamepad.index,
+                e.gamepad.id,
+                e.gamepad.buttons.length,
+                e.gamepad.axes.length
+                );
+            });
         
+        console.log("test 1")
+            
+        // --- end -----
 
         this.controllerModelFactory = new XRControllerModelFactory()
 
