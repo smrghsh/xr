@@ -44,6 +44,8 @@ export default class Controllers
         this.controllerGrip2.add( this.controllerModelFactory.createControllerModel( this.controllerGrip2 ) )
         this.scene.add( this.controllerGrip2 )
 
+
+        //raycasting (native)//
         const geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
 
 		const line = new THREE.Line( geometry );
@@ -69,21 +71,5 @@ export default class Controllers
 
     update()
     {
-        console.log(this.controller1)
-        console.log("this is no 2",this.controller2)
-        //imported from https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getGamepads
-        this.controller1.addEventListener("gamepadconnected", (e) => {
-            console.log(
-                "Gamepad connected at index %d: %s. %d buttons, %d axes.",
-                e.gamepad.index,
-                e.gamepad.id,
-                e.gamepad.buttons.length,
-                e.gamepad.axes.length
-                );
-            });
-        
-        console.log("test 1")
-            
-        // --- end -----
     }
 }
