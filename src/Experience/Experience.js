@@ -10,7 +10,7 @@ import sources from './sources.js'
 import { VRButton } from 'three/examples/jsm/webxr/VRButton.js'
 import Controllers from './Controllers.js'
 
-console.log('hello')
+
 let instance = null
 
 export default class Experience

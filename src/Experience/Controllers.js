@@ -3,7 +3,7 @@ import Experience from './Experience.js'
 import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js';
 
 //Samantha
-
+console.log("listen")
 export default class Controllers
 {
     constructor()
@@ -23,30 +23,16 @@ export default class Controllers
             // audio.play();
         }
         this.controller1.addEventListener( 'selectstart', onSelectStart );
-        console.log(this.controller1)
         // this.controller1.addEventListener( 'selectend', onSelectEnd );
         this.scene.add( this.controller1 );
         
         this.controller2 = this.renderer.instance.xr.getController( 1 );
-        console.log(this.controller2)
+        
         this.controller2.addEventListener( 'selectstart', onSelectStart );
         // this.controller2.addEventListener( 'selectend', onSelectEnd );
         this.scene.add( this.controller2 );
         
-        //imported from https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getGamepads
-        this.controller1.addEventListener("gamepadconnected", (e) => {
-            console.log(
-                "Gamepad connected at index %d: %s. %d buttons, %d axes.",
-                e.gamepad.index,
-                e.gamepad.id,
-                e.gamepad.buttons.length,
-                e.gamepad.axes.length
-                );
-            });
         
-        console.log("test 1")
-            
-        // --- end -----
 
         this.controllerModelFactory = new XRControllerModelFactory()
 
@@ -70,5 +56,21 @@ export default class Controllers
 
     update()
     {
+        console.log(this.controller1)
+        console.log("this is no 2",this.controller2)
+        //imported from https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getGamepads
+        this.controller1.addEventListener("gamepadconnected", (e) => {
+            console.log(
+                "Gamepad connected at index %d: %s. %d buttons, %d axes.",
+                e.gamepad.index,
+                e.gamepad.id,
+                e.gamepad.buttons.length,
+                e.gamepad.axes.length
+                );
+            });
+        
+        console.log("test 1")
+            
+        // --- end -----
     }
 }
