@@ -15,7 +15,7 @@ export default class Controllers
         this.renderer = this.experience.renderer
         
         
-        this.controller1 = this.renderer.xr.getController( 0 ); //deleted "instanve"
+        this.controller1 = this.renderer.instance.xr.getController( 0 ); 
         // var audio = new Audio('audio/common_voice_en_10.mp3');
         // audio.play();   
         const onSelectStart = function(){
@@ -43,6 +43,19 @@ export default class Controllers
         this.controllerGrip2 = this.renderer.instance.xr.getControllerGrip( 1 )
         this.controllerGrip2.add( this.controllerModelFactory.createControllerModel( this.controllerGrip2 ) )
         this.scene.add( this.controllerGrip2 )
+
+        const geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
+
+		const line = new THREE.Line( geometry );
+		line.name = 'line';
+		line.scale.z = 5;
+
+		this.controller1.add( line.clone() );
+		this.controller2.add( line.clone() );
+
+		raycaster = new THREE.Raycaster();
+
+
     }
 
     setInstance()
