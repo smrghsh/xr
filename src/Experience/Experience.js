@@ -59,11 +59,55 @@ export default class Experience
         this.lastUpdated = this.time.current
         this.scene = new THREE.Scene()
 
+        /*SAMANTHA'S EDITS*/
 
-        // this.geometry = new THREE.SphereGeometry(1, 32, 32)
+        const menuGeometry = new THREE.PlaneGeometry( 0.24, 0.5 );
+			const menuMaterial = new THREE.MeshPhongMaterial( {
+				opacity: 0,
+				transparent: true,
+			} );
+			const menuMesh = new THREE.Mesh( menuGeometry, menuMaterial );
+			menuMesh.position.set( 0.4, 1, - 1 );
+			menuMesh.rotation.y = - Math.PI / 12;
+			scene.add( menuMesh );
+
+			const orangeButton = makeButtonMesh( 0.2, 0.1, 0.01, 0xffd3b5 );
+			orangeButton.position.set( 0, 0.18, 0 );
+			menuMesh.add( orangeButton );
+
+			const pinkButton = makeButtonMesh( 0.2, 0.1, 0.01, 0xe84a5f );
+			pinkButton.position.set( 0, 0.06, 0 );
+			menuMesh.add( pinkButton );
+
+			const resetButton = makeButtonMesh( 0.2, 0.1, 0.01, 0x355c7d );
+			const resetButtonText = createText( 'reset', 0.06 );
+			resetButton.add( resetButtonText );
+			resetButtonText.position.set( 0, 0, 0.0051 );
+			resetButton.position.set( 0, - 0.06, 0 );
+			menuMesh.add( resetButton );
+
+			const exitButton = makeButtonMesh( 0.2, 0.1, 0.01, 0xff0000 );
+			const exitButtonText = createText( 'exit', 0.06 );
+			exitButton.add( exitButtonText );
+			exitButtonText.position.set( 0, 0, 0.0051 );
+			exitButton.position.set( 0, - 0.18, 0 );
+			menuMesh.add( exitButton );
+
+			const tkGeometry = new THREE.TorusKnotGeometry( 0.5, 0.2, 200, 32 );
+			const tkMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff } );
+			tkMaterial.metalness = 0.8;
+			const torusKnot = new THREE.Mesh( tkGeometry, tkMaterial );
+			torusKnot.position.set( 0, 1, - 5 );
+			scene.add( torusKnot );
+
+
+        this.geometry = new THREE.SphereGeometry(1, 32, 32)
         
-        // this.mesh = new THREE.Mesh(this.geometry, this.material)
-        // this.scene.add(this.mesh)
+        this.mesh = new THREE.Mesh(this.geometry, this.material)
+        this.scene.add(this.mesh)
+
+        /*END OF SAMANTHA'S EDITS*/
+
 
         this.resources = new Resources(sources)
         this.world = new World()

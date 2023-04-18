@@ -28,6 +28,7 @@ export default class World
             this.spectra = new Spectra()
             // this.sushi = new Sushi()
             this.torus = new Torus()
+            console.log("torus created")
             this.environment = new Environment()
         })
     }
