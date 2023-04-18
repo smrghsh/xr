@@ -61,44 +61,44 @@ export default class Experience
 
         /*SAMANTHA'S EDITS*/
 
-        const menuGeometry = new THREE.PlaneGeometry( 0.24, 0.5 );
-			const menuMaterial = new THREE.MeshPhongMaterial( {
-				opacity: 0,
-				transparent: true,
-			} );
-			const menuMesh = new THREE.Mesh( menuGeometry, menuMaterial );
-			menuMesh.position.set( 0.4, 1, - 1 );
-			menuMesh.rotation.y = - Math.PI / 12;
-			scene.add( menuMesh );
+        this.menuGeometry = new THREE.PlaneGeometry( 0.24, 0.5 );
+		this.menuMaterial = new THREE.MeshPhongMaterial( {
+			opacity: 0,
+			transparent: true,
+		} );
+        this.menuMesh = new THREE.Mesh(this.menuGeometry, this.menuMaterial );
+        this.menuMesh.position.set( 0.4, 1, - 1 );
+        this.menuMesh.rotation.y = - Math.PI / 12;
+        this.scene.add( this.menuMesh );
 
-			const orangeButton = makeButtonMesh( 0.2, 0.1, 0.01, 0xffd3b5 );
-			orangeButton.position.set( 0, 0.18, 0 );
-			menuMesh.add( orangeButton );
+        // this.orangeButton = makeButtonMesh( 0.2, 0.1, 0.01, 0xffd3b5 );
+        // orangeButton.position.set( 0, 0.18, 0 );
+        // menuMesh.add( orangeButton );
 
-			const pinkButton = makeButtonMesh( 0.2, 0.1, 0.01, 0xe84a5f );
-			pinkButton.position.set( 0, 0.06, 0 );
-			menuMesh.add( pinkButton );
+        // const pinkButton = makeButtonMesh( 0.2, 0.1, 0.01, 0xe84a5f );
+        // pinkButton.position.set( 0, 0.06, 0 );
+        // menuMesh.add( pinkButton );
 
-			const resetButton = makeButtonMesh( 0.2, 0.1, 0.01, 0x355c7d );
-			const resetButtonText = createText( 'reset', 0.06 );
-			resetButton.add( resetButtonText );
-			resetButtonText.position.set( 0, 0, 0.0051 );
-			resetButton.position.set( 0, - 0.06, 0 );
-			menuMesh.add( resetButton );
+        // const resetButton = makeButtonMesh( 0.2, 0.1, 0.01, 0x355c7d );
+        // const resetButtonText = createText( 'reset', 0.06 );
+        // resetButton.add( resetButtonText );
+        // resetButtonText.position.set( 0, 0, 0.0051 );
+        // resetButton.position.set( 0, - 0.06, 0 );
+        // menuMesh.add( resetButton );
 
-			const exitButton = makeButtonMesh( 0.2, 0.1, 0.01, 0xff0000 );
-			const exitButtonText = createText( 'exit', 0.06 );
-			exitButton.add( exitButtonText );
-			exitButtonText.position.set( 0, 0, 0.0051 );
-			exitButton.position.set( 0, - 0.18, 0 );
-			menuMesh.add( exitButton );
+        // const exitButton = makeButtonMesh( 0.2, 0.1, 0.01, 0xff0000 );
+        // const exitButtonText = createText( 'exit', 0.06 );
+        // exitButton.add( exitButtonText );
+        // exitButtonText.position.set( 0, 0, 0.0051 );
+        // exitButton.position.set( 0, - 0.18, 0 );
+        // menuMesh.add( exitButton );
 
-			const tkGeometry = new THREE.TorusKnotGeometry( 0.5, 0.2, 200, 32 );
-			const tkMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff } );
-			tkMaterial.metalness = 0.8;
-			const torusKnot = new THREE.Mesh( tkGeometry, tkMaterial );
-			torusKnot.position.set( 0, 1, - 5 );
-			scene.add( torusKnot );
+        this.tkGeometry = new THREE.TorusKnotGeometry( 0.5, 0.2, 200, 32 );
+        this.tkMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff } );
+        this.tkMaterial.metalness = 0.8;
+        this.torusKnot = new THREE.Mesh( this.tkGeometry, this.tkMaterial );
+        this.torusKnot.position.set( 0, 1, - 5 );
+        this.scene.add( this.torusKnot );
 
 
         this.geometry = new THREE.SphereGeometry(1, 32, 32)
