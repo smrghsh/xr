@@ -15,7 +15,7 @@ export default class World
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.floor = new Floor()
-        this.torus = new Torus()
+        
         // this.circles = new Circles()
         // this.hypercube = new Hypercube()
         // Wait for resources
@@ -27,7 +27,7 @@ export default class World
             this.stars = new Stars()
             this.spectra = new Spectra()
             // this.sushi = new Sushi()
-            
+            this.torus = new Torus()
             this.environment = new Environment()
         })
     }
