@@ -9,7 +9,7 @@ export default class Torus {
         const TorusGeometry = new THREE.TorusKnotGeometry( 0.5, 0.2, 200, 32 )
         const TorusMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff } );
 		const TorusKnot = new THREE.Mesh( TorusGeometry, TorusMaterial );
-        TorusKnot.position.set( 0, 1, - 5 );
+        TorusKnot.position.set( 0, 0, 0 );
         this.scene.add( this.TorusKnot );
     }
     update(){

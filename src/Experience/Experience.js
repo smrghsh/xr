@@ -60,10 +60,10 @@ export default class Experience
         this.scene = new THREE.Scene()
 
 
-        this.geometry = new THREE.SphereGeometry(1, 32, 32)
+        // this.geometry = new THREE.SphereGeometry(1, 32, 32)
         
-        this.mesh = new THREE.Mesh(this.geometry, this.material)
-        this.scene.add(this.mesh)
+        // this.mesh = new THREE.Mesh(this.geometry, this.material)
+        // this.scene.add(this.mesh)
 
         this.resources = new Resources(sources)
         this.world = new World()
