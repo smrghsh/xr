@@ -10,6 +10,9 @@ import sources from './sources.js'
 import { VRButton } from 'three/examples/jsm/webxr/VRButton.js'
 import Controllers from './Controllers.js'
 
+/* Samantha's import */
+import { createText } from 'three/addons/webxr/Text2D.js';
+
 console.log("new")
 let instance = null
 
@@ -66,12 +69,24 @@ export default class Experience
 			opacity: 0,
 			transparent: true,
 		} );
+        
         this.menuMesh = new THREE.Mesh(this.menuGeometry, this.menuMaterial );
-        this.menuMesh.position.set( 0.4, 1, - 1 );
+        this.menuMesh.position.set( 2, 1, - 2 );
         this.menuMesh.rotation.y = - Math.PI / 12;
-        this.scene.add( this.menuMesh );
 
-        // this.orangeButton = makeButtonMesh( 0.2, 0.1, 0.01, 0xffd3b5 );
+        this.buttongeometry = new THREE.BoxGeometry( 2, 1, 0.1);
+        this.buttonmaterial = new THREE.MeshPhongMaterial( { color: 'black' } );
+        this.buttonMesh = new THREE.Mesh( this.buttongeometry, this.buttonmaterial );
+        this.buttonMesh.castShadow = true;
+        this.buttonMesh.receiveShadow = true;
+        this.resetButtonText = createText( 'reset', 0.06 );
+		this.buttonMesh.add( this.resetButtonText );
+		this.resetButtonText.position.set( 0, 0, 0.0051 );
+        this.menuMesh.add( this.buttonMesh )
+
+        
+        this.scene.add( this.menuMesh );
+    
         // orangeButton.position.set( 0, 0.18, 0 );
         // menuMesh.add( orangeButton );
 

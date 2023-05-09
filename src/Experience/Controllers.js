@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import Experience from './Experience.js'
+import Raycasting from './Raycasting.js'
 import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js';
 
 //Samantha
@@ -46,16 +47,10 @@ export default class Controllers
 
 
         //raycasting (native)//
-        const geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
+        this.controller1.add( Raycasting.line.clone() );
+		this.controller2.add( Raycasting.line.clone() );
 
-		const line = new THREE.Line( geometry );
-		line.name = 'line';
-		line.scale.z = 5;
-
-		this.controller1.add( line.clone() );
-		this.controller2.add( line.clone() );
-
-		raycaster = new THREE.Raycaster();
+		
 
 
     }
