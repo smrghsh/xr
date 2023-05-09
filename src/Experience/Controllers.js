@@ -14,7 +14,7 @@ export default class Controllers
         this.sizes = this.experience.sizes
         this.scene = this.experience.scene
         this.renderer = this.experience.renderer
-        
+        this.raycasting = new Raycasting()
         
         this.controller1 = this.renderer.instance.xr.getController( 0 ); 
         // var audio = new Audio('audio/common_voice_en_10.mp3');
@@ -47,8 +47,8 @@ export default class Controllers
 
 
         //raycasting (native)//
-        this.controller1.add( Raycasting.line.clone() );
-		this.controller2.add( Raycasting.line.clone() );
+        this.controller1.add( this.raycasting.line.clone() );
+		this.controller2.add( this.raycasting.line.clone() );
 
 		
 
