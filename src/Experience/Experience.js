@@ -11,7 +11,7 @@ import { VRButton } from 'three/examples/jsm/webxr/VRButton.js'
 import Controllers from './Controllers.js'
 
 /* Samantha's import */
-import { createText } from 'three/addons/webxr/Text2D.js';
+import { createText } from 'three/examples/jsm/webxr/Text2D.js';
 
 console.log("new")
 let instance = null
@@ -64,26 +64,52 @@ export default class Experience
 
         /*SAMANTHA'S EDITS*/
 
-        this.menuGeometry = new THREE.PlaneGeometry( 0.24, 0.5 );
+        this.menuGeometry = new THREE.PlaneGeometry( 2, 3 );
 		this.menuMaterial = new THREE.MeshPhongMaterial( {
-			opacity: 0,
-			transparent: true,
+			// opacity: 50,
+            color: 'green', 
+            // side: THREE.DoubleSide,
+            // wireframe:true,
+			// transparent: true,
 		} );
         
         this.menuMesh = new THREE.Mesh(this.menuGeometry, this.menuMaterial );
         this.menuMesh.position.set( 2, 1, - 2 );
         this.menuMesh.rotation.y = - Math.PI / 12;
 
-        this.buttongeometry = new THREE.BoxGeometry( 2, 1, 0.1);
-        this.buttonmaterial = new THREE.MeshPhongMaterial( { color: 'black' } );
+
+        this.buttongeometry = new THREE.BoxGeometry( 1.5, 0.5, 0.1);
+        this.buttonmaterial = new THREE.MeshPhongMaterial( { color: 'blue' } );
         this.buttonMesh = new THREE.Mesh( this.buttongeometry, this.buttonmaterial );
         this.buttonMesh.castShadow = true;
         this.buttonMesh.receiveShadow = true;
-        this.resetButtonText = createText( 'reset', 0.06 );
-		this.buttonMesh.add( this.resetButtonText );
-		this.resetButtonText.position.set( 0, 0, 0.0051 );
+        this.buttonMesh.position.set(0,0,0)
+
+        this.navyButtonText = createText( 'navy', 0.4 );
+		this.buttonMesh.add( this.navyButtonText );
+		this.navyButtonText.position.set( 0, 0, 0.051 );
+
         this.menuMesh.add( this.buttonMesh )
 
+        this.buttonMesh2 = new THREE.Mesh( this.buttongeometry, this.buttonmaterial );
+
+        this.purpleButtonText = createText( 'purple', 0.4 );
+		this.buttonMesh2.add( this.purpleButtonText );
+		this.purpleButtonText.position.set( 0, 0, 0.051 );
+        this.buttonMesh2.position.set(0,-.75,0)
+        this.menuMesh.add( this.buttonMesh2 )
+
+        this.buttonMesh3 = new THREE.Mesh( this.buttongeometry, this.buttonmaterial );
+        
+        this.limeButtonText = createText( 'lime green', 0.25 );
+		this.buttonMesh3.add( this.limeButtonText );
+		this.limeButtonText.position.set( 0, 0, 0.051 );
+        
+        // this.resetButtonText = createText( 'reset', 0.06 );
+		// this.buttonMesh2.add( this.resetButtonText );
+		// this.resetButtonText.position.set( 0, 0, 0.0051 );
+        this.buttonMesh3.position.set(0,.75,0)
+        this.menuMesh.add( this.buttonMesh3 )
         
         this.scene.add( this.menuMesh );
     
