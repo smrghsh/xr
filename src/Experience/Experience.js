@@ -116,7 +116,7 @@ export default class Experience
         this.tkMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff } );
         this.tkMaterial.metalness = 0.8;
         this.torusKnot = new THREE.Mesh( this.tkGeometry, this.tkMaterial );
-        this.torusKnot.position.set( 0, 1, - 2 );
+        this.torusKnot.position.set( 0, 5, - 2 );
         this.scene.add( this.torusKnot );
 
 
@@ -143,7 +143,6 @@ export default class Experience
         this.controllers = new Controllers()
 
 
-        // this.raycaster = new THREE.Raycaster()
         this.mouse = new THREE.Vector2()
         this.INTERSECTED = null
         window.addEventListener('mousemove', (event) =>
@@ -188,25 +187,26 @@ export default class Experience
         //https://github.com/mrdoob/three.js/blob/master/examples/webgl_interactive_cubes.html
         
         //change this to be controller if controller is active
-        // this.raycaster.setFromCamera( this.mouse, this.camera.instance );
-        // // console.log(this.mouse)
-        // // TODO, make raycaster its own class
-        // const intersects = this.raycaster.intersectObjects( this.scene.children, false );
-        // if ( intersects.length > 0 ) {
-        //     if ( this.INTERSECTED != intersects[ 0 ].object ) {
-        //         if ( this.INTERSECTED ) this.INTERSECTED.material.color.setHex( this.INTERSECTED.currentHex );
-        //         this.INTERSECTED = intersects[ 0 ].object;
-        //         this.INTERSECTED.currentHex = this.INTERSECTED.material.color.getHex();
-        //         this.INTERSECTED.material.color.setHex( 0xff0000 );
+        // this.controllers.raycaster.setFromCamera( this.mouse, this.camera.instance );
 
-        //     }
-        // } else {
+        this.intersects = this.contollers.raycaster.intersectObjects( this.menuMesh, true );
+        if ( this.intersects.length > 0 ) {
+            if ( this.INTERSECTED != intersects[ 0 ].object ) {
+                // if ( this.INTERSECTED ) this.INTERSECTED.material.color.setHex( this.INTERSECTED.currentHex );
+                // this.INTERSECTED = intersects[ 0 ].object;
+                // this.INTERSECTED.currentHex = this.INTERSECTED.material.color.getHex();
+                // this.INTERSECTED.material.color.setHex( 0xff0000 );
+                console.log('ahhhhhh',this.INTERSECTED)
 
-        //     if ( this.INTERSECTED ) this.INTERSECTED.material.color.setHex( this.INTERSECTED.currentHex );
+            }
+        } else {
 
-        //     this.INTERSECTED = null;
+            // if ( this.INTERSECTED ) this.INTERSECTED.material.color.setHex( this.INTERSECTED.currentHex );
+            console.log('nahhhh')
 
-        // }
+            // this.INTERSECTED = null;
+
+        }
     }
     destroy()
     {
