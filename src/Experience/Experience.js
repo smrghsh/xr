@@ -56,7 +56,6 @@ export default class Experience
             })
         }
 
-      
         this.sizes = new Sizes()
         this.time = new Time()
         this.lastUpdated = this.time.current
@@ -105,34 +104,13 @@ export default class Experience
 		this.buttonMesh3.add( this.limeButtonText );
 		this.limeButtonText.position.set( 0, 0, 0.051 );
         
-        // this.resetButtonText = createText( 'reset', 0.06 );
-		// this.buttonMesh2.add( this.resetButtonText );
-		// this.resetButtonText.position.set( 0, 0, 0.0051 );
+        
         this.buttonMesh3.position.set(0,.75,0)
         this.menuMesh.add( this.buttonMesh3 )
         
         this.scene.add( this.menuMesh );
     
-        // orangeButton.position.set( 0, 0.18, 0 );
-        // menuMesh.add( orangeButton );
-
-        // const pinkButton = makeButtonMesh( 0.2, 0.1, 0.01, 0xe84a5f );
-        // pinkButton.position.set( 0, 0.06, 0 );
-        // menuMesh.add( pinkButton );
-
-        // const resetButton = makeButtonMesh( 0.2, 0.1, 0.01, 0x355c7d );
-        // const resetButtonText = createText( 'reset', 0.06 );
-        // resetButton.add( resetButtonText );
-        // resetButtonText.position.set( 0, 0, 0.0051 );
-        // resetButton.position.set( 0, - 0.06, 0 );
-        // menuMesh.add( resetButton );
-
-        // const exitButton = makeButtonMesh( 0.2, 0.1, 0.01, 0xff0000 );
-        // const exitButtonText = createText( 'exit', 0.06 );
-        // exitButton.add( exitButtonText );
-        // exitButtonText.position.set( 0, 0, 0.0051 );
-        // exitButton.position.set( 0, - 0.18, 0 );
-        // menuMesh.add( exitButton );
+        
 
         this.tkGeometry = new THREE.TorusKnotGeometry( 0.5, 0.2, 200, 32 );
         this.tkMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff } );
@@ -148,7 +126,6 @@ export default class Experience
         this.scene.add(this.mesh)
 
         /*END OF SAMANTHA'S EDITS*/
-
 
         this.resources = new Resources(sources)
         this.world = new World()
@@ -166,7 +143,7 @@ export default class Experience
         this.controllers = new Controllers()
 
 
-        this.raycaster = new THREE.Raycaster()
+        // this.raycaster = new THREE.Raycaster()
         this.mouse = new THREE.Vector2()
         this.INTERSECTED = null
         window.addEventListener('mousemove', (event) =>
@@ -211,9 +188,9 @@ export default class Experience
         //https://github.com/mrdoob/three.js/blob/master/examples/webgl_interactive_cubes.html
         
         //change this to be controller if controller is active
-        this.raycaster.setFromCamera( this.mouse, this.camera.instance );
-        // console.log(this.mouse)
-        // TODO, make raycaster its own class
+        // this.raycaster.setFromCamera( this.mouse, this.camera.instance );
+        // // console.log(this.mouse)
+        // // TODO, make raycaster its own class
         // const intersects = this.raycaster.intersectObjects( this.scene.children, false );
         // if ( intersects.length > 0 ) {
         //     if ( this.INTERSECTED != intersects[ 0 ].object ) {

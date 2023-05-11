@@ -13,7 +13,7 @@ export default class Raycaster
         this.line = new THREE.Line( this.geometry );
         this.line.scale.z = 5;  
         
-        // this.raycaster = new THREE.Raycaster();
+        this.raycaster = new THREE.Raycaster();
 
     }
 }

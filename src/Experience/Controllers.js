@@ -46,7 +46,7 @@ export default class Controllers
         this.scene.add( this.controllerGrip2 )
 
 
-        //raycasting (native)//
+        //raycasting//
         this.controller1.add( this.raycasting.line.clone() );
 		this.controller2.add( this.raycasting.line.clone() );
 
