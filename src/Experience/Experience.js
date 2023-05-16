@@ -188,10 +188,8 @@ export default class Experience
         
         //change this to be controller if controller is active
         // this.controllers.raycaster.setFromCamera( this.mouse, this.camera.instance );
-        console.log('hello', this.menuMesh)
-        console.log('raycaster', this.controllers.raycasting)
         this.intersects = this.controllers.raycasting.raycaster.intersectObjects( this.menuMesh, true);
-        console.log(this.intersects.menuMesh.color.set('#0000ff'))
+        console.log(this.intersects)
         
         
         if ( this.intersects.length > 0 ) {
@@ -206,7 +204,7 @@ export default class Experience
         } else {
 
             // if ( this.INTERSECTED ) this.INTERSECTED.material.color.setHex( this.INTERSECTED.currentHex );
-            console.log('nahhhh')
+            // console.log('nahhhh')
 
             // this.INTERSECTED = null;
 
