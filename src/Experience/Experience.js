@@ -190,6 +190,8 @@ export default class Experience
         // this.controllers.raycaster.setFromCamera( this.mouse, this.camera.instance );
 
         this.intersects = this.contollers.raycaster.intersectObjects( this.menuMesh, true );
+        console.log(this.intersects)
+        
         if ( this.intersects.length > 0 ) {
             if ( this.INTERSECTED != intersects[ 0 ].object ) {
                 // if ( this.INTERSECTED ) this.INTERSECTED.material.color.setHex( this.INTERSECTED.currentHex );
