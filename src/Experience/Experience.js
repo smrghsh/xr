@@ -9,6 +9,7 @@ import World from "./World/World.js";
 import sources from "./sources.js";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import Controllers from "./Controllers.js";
+import Hands from "./Hands.js";
 
 let instance = null;
 
