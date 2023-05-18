@@ -58,41 +58,41 @@ export default class Controllers
         this.line.name = 'line';
         this.line.scale.z = 5;
         
-        let line2 = new THREE.Line( geom2 );
-        line2.material.color = new THREE.Color('white')
-        line2.name = 'line2';
+        this.line2 = new THREE.Line( geom2 );
+        this.line2.material.color = new THREE.Color('white')
+        this.line2.name = 'line2';
         
-        let line3 = new THREE.Line( geom3 );
-        line3.material.color = new THREE.Color('white')
-        line3.name = 'line3';
+        this.line3 = new THREE.Line( geom3 );
+        this.line3.material.color = new THREE.Color('white')
+        this.line3.name = 'line3';
         
-        let line4 = new THREE.Line( geom4 );
-        line4.material.color = new THREE.Color('white')
-        line4.name = 'line4';
+        this.line4 = new THREE.Line( geom4 );
+        this.line4.material.color = new THREE.Color('white')
+        this.line4.name = 'line4';
         
-        let line5 = new THREE.Line( geom5 );
-        line5.material.color = new THREE.Color('white')
-        line5.name = 'line5';
+        this.line5 = new THREE.Line( geom5 );
+        this.line5.material.color = new THREE.Color('white')
+        this.line5.name = 'line5';
         
-        let line6 = new THREE.Line( geom6 );
-        line6.material.color = new THREE.Color('white')
-        line6.name = 'line6';
+        this.line6 = new THREE.Line( geom6 );
+        this.line6.material.color = new THREE.Color('white')
+        this.line6.name = 'line6';
         
-        let line7 = new THREE.Line( geom7 );
-        line7.material.color = new THREE.Color('white')
-        line7.name = 'line7';
+        this.line7 = new THREE.Line( geom7 );
+        this.line7.material.color = new THREE.Color('white')
+        this.line7.name = 'line7';
 
-        this.controller1.add( line2.clone() );
-        this.controller1.add( line3.clone() );
-        this.controller1.add( line4.clone() );
-        this.controller1.add( line5.clone() );
-        this.controller1.add( line6.clone() );
-        this.controller1.add( line7.clone() );
+        this.controller1.add( this.line2.clone() );
+        this.controller1.add( this.line3.clone() );
+        this.controller1.add( this.line4.clone() );
+        this.controller1.add( this.line5.clone() );
+        this.controller1.add( this.line6.clone() );
+        this.controller1.add( this.line7.clone() );
 
         let ge = new THREE.PlaneGeometry(0.03, 0.03); 
         let ma = new THREE.MeshBasicMaterial( { color: 'white' } ); 
-        let rtrig = new THREE.Mesh( ge, ma ); 
-        let rsq = new THREE.Mesh( ge, ma ); 
+        this.rtrig = new THREE.Mesh( ge, ma ); 
+        this.rsq = new THREE.Mesh( ge, ma ); 
         let sp3 = new THREE.Mesh( ge, ma ); 
         let sp4 = new THREE.Mesh( ge, ma ); 
         let sp5 = new THREE.Mesh( ge, ma ); 
@@ -106,11 +106,11 @@ export default class Controllers
         let sp11 = new THREE.Mesh( ge, ma ); 
         let sp12 = new THREE.Mesh( ge, ma ); 
 
-        rtrig.position.set(0, 0, -0.06)
-        rtrig.rotation.x -= Math.PI/2
+        this.rtrig.position.set(0, 0, -0.06)
+        this.rtrig.rotation.x -= Math.PI/2
         
-        rsq.position.set(0.07, 0, -0.02)
-        rsq.rotation.x -= Math.PI/2
+        this.rsq.position.set(0.07, 0, -0.02)
+        this.rsq.rotation.x -= Math.PI/2
         
         sp3.position.set(0.07, 0, 0.03)
         sp3.rotation.x -= Math.PI/2
@@ -162,7 +162,7 @@ export default class Controllers
             this.controller2.gamepad = event.data.gamepad
         });
 
-        this.c2_prims = [rtrig, rsq, rsq, rsq, rsq, rsq, rsq]
+        this.c2_prims = [this.rtrig, this.rsq, this.rsq, this.rsq, this.rsq, this.rsq, this.rsq]
 
     }
 
@@ -192,7 +192,6 @@ export default class Controllers
     }
     
     button_end(){
-        this.controller2.add(this.line)
         if(this.controller2.gamepad){
             console.log("end")
             for(let i = 0; i< this.controller2.gamepad.buttons.length; i++){
