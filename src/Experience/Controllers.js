@@ -87,6 +87,7 @@ export default class Controllers
     update()
     {
         if(this.connection){
+            this.controller2.add(this.line2)
             this.button_end()
             this.button_start()
         }
