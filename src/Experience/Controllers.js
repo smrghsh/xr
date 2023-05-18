@@ -53,8 +53,7 @@ export default class Controllers
                 this.controller2.gamepad = event.data.gamepad
                 console.log(this.controller2.gamepad)
                 console.log("bababoowie")
-                this.button_end()
-                this.button_start()
+
             } 
         });
 
@@ -87,10 +86,8 @@ export default class Controllers
     update()
     {
         if(this.connection){
-            // this.button_end()
-            // this.button_start()
-        } else {
-            this.controller2.add(this.line)
+            this.button_end()
+            this.button_start()
         }
     }
     button_start(){
@@ -103,7 +100,7 @@ export default class Controllers
                 }
             }
     
-        }
+        } else {this.controller2.add(this.line)}
     }
     
     button_end(){
