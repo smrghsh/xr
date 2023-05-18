@@ -17,6 +17,7 @@ export default class Hands {
     this.hand1.userData.currentHandModel = 0;
     this.scene.add(this.hand1);
 
+    this.handModelFactory = new XRHandModelFactory()
     this.hleft = this.handModelFactory.createHandModel(this.hand1, "boxes");
     this.hand1.add(this.hleft);
     this.hand1.addEventListener("pinchend", function () {});
