@@ -26,9 +26,13 @@ export default class Controllers
         this.trig.position.set(0, 0, -0.06)
         this.trig.rotation.x -= Math.PI/2
 
-        this.trigger = new THREE.Group()
-        this.trigger.add(this.t_line)
-        this.trigger.add(this.trig)
+        this.l_trigger = new THREE.Group()
+        this.l_trigger.add(this.t_line.clone())
+        this.l_trigger.add(this.trig.clone())
+
+        this.r_trigger = new THREE.Group()
+        this.r_trigger.add(this.t_line.clone())
+        this.r_trigger.add(this.trig.clone())
 
         this.r_connection = false
         this.l_connection = false
@@ -110,13 +114,13 @@ export default class Controllers
     trigger_start(){
         if(this.controller2.gamepad){
             if(this.controller2.gamepad.buttons[0].pressed){
-                this.controller2.add(this.trigger)
+                this.controller2.add(this.r_trigger)
             }
     
         } 
         if(this.controller1.gamepad){
             if(this.controller1.gamepad.buttons[0].pressed){
-                    this.controller1.add(this.trigger)
+                    this.controller1.add(this.l_trigger)
             }
         } 
     }
@@ -125,13 +129,13 @@ export default class Controllers
     trigger_end(){
         if(this.controller2.gamepad){
             if(!this.controller2.gamepad.buttons[0].pressed){
-                this.controller2.remove(this.trigger)
+                this.controller2.remove(this.r_trigger)
             }
     
         } 
         if(this.controller1.gamepad){
             if(!this.controller1.gamepad.buttons[0].pressed){
-                this.controller1.remove(this.trigger)
+                this.controller1.remove(this.l_trigger)
             }
         }
     }
