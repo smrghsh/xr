@@ -184,6 +184,7 @@ export default class Controllers
             console.log("start")
             for(let i = 0; i< this.controller2.gamepad.buttons.length; i++){
                 if(this.controller2.gamepad.buttons[i].pressed){
+                    this.controller2.add(this.line)
                     this.controller2.add(this.c2_prims[i])
                 }
             }
@@ -196,6 +197,7 @@ export default class Controllers
             console.log("end")
             for(let i = 0; i< this.controller2.gamepad.buttons.length; i++){
                 if(!this.controller2.gamepad.buttons[i].pressed){
+                    this.controller2.remove(this.line)
                     this.controller2.remove(this.c2_prims[i])
                 }
             }
