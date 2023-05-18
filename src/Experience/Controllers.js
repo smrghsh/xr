@@ -32,7 +32,9 @@ export default class Controllers
         this.controller2.addEventListener( 'selectstart', onSelectStart );
         // this.controller2.addEventListener( 'selectend', onSelectEnd );
         this.controller2.addEventListener( 'connected', ( event )=> {
-            this.controller2.gamepad = event.data.gamepad
+            if(event.data.gamepad){
+                this.controller2.gamepad = event.data.gamepad
+            }
         });
         this.scene.add( this.controller2 );
         
@@ -164,6 +166,10 @@ export default class Controllers
 
         this.c2_prims = [this.rtrig, this.rsq, this.rsq, this.rsq, this.rsq, this.rsq, this.rsq]
 
+        if(this.controller2.gamepad){
+            this.controller2.add(this.line)
+        }
+
     }
 
     setInstance()
@@ -181,7 +187,7 @@ export default class Controllers
     }
     button_start(){
         if(this.controller2.gamepad){
-            this.controller2.add(this.line)
+            this.controller2.add(this.rsq)
             console.log("start")
             for(let i = 0; i< this.controller2.gamepad.buttons.length; i++){
                 if(this.controller2.gamepad.buttons[i].pressed){
