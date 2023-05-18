@@ -92,7 +92,6 @@ export default class Controllers
     }
     button_start(){
         if(this.controller2.gamepad){
-            this.controller2.add(this.line2)
             console.log("start")
             for(let i = 0; i< this.controller2.gamepad.buttons.length; i++){
                 if(this.controller2.gamepad.buttons[i].pressed){
@@ -100,7 +99,7 @@ export default class Controllers
                 }
             }
     
-        } else {this.controller2.add(this.line)}
+        } 
     }
     
     button_end(){
