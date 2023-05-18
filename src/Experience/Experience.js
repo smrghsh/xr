@@ -54,13 +54,13 @@ export default class Experience {
     this.world = new World();
     this.camera = new Camera();
     this.renderer = new Renderer();
-    this.locomotion = new Locomotion();
+    // this.locomotion = new Locomotion();
 
     this.renderer.instance.xr.enabled = true;
     document.body.appendChild(VRButton.createButton(this.renderer.instance));
     this.renderer.instance.setAnimationLoop(() => {
       // tick();
-      this.locomotion.teleportVR.update(this.locomotion.elevationMeshList);
+      // this.locomotion.teleportVR.update(this.locomotion.elevationMeshList);
       this.renderer.instance.render(this.scene, this.camera.instance);
     });
 
