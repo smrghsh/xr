@@ -60,6 +60,7 @@ export default class Experience {
     });
 
     this.controllers = new Controllers();
+    this.hands = new Hands();
 
     this.raycaster = new THREE.Raycaster();
     this.mouse = new THREE.Vector2();
