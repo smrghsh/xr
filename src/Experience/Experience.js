@@ -90,7 +90,7 @@ export default class Experience {
     this.camera.resize();
   }
   update() {
-    this.controllers.button_start()
+    this.controllers.update()
     this.camera.update();
     // this.renderer.update()
     this.world.update();

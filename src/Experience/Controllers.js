@@ -27,6 +27,9 @@ export default class Controllers
         this.line2.scale.z = 5;
 
 
+
+        this.connection = false
+
         this.controller1 = this.renderer.instance.xr.getController( 0 );
         // var audio = new Audio('audio/common_voice_en_10.mp3');
         // audio.play();   
@@ -41,15 +44,21 @@ export default class Controllers
         
         this.controller2 = this.renderer.instance.xr.getController( 1 );
         this.controller2.addEventListener( 'selectstart', onSelectStart );
+        this.controller2.gamepad = undefined
         // this.controller2.addEventListener( 'selectend', onSelectEnd );
         this.controller2.addEventListener( 'connected', ( event )=> {
             if(event.data.gamepad){
-                console.log("not null")
+                this.connection = true
+                console.log("not null V")
                 this.controller2.gamepad = event.data.gamepad
+                console.log(this.controller2.gamepad)
+                console.log("bababoowie")
+                this.button_end()
+                this.button_start()
             } 
         });
+
         this.scene.add( this.controller2 );
-        
         
 
         this.controllerModelFactory = new XRControllerModelFactory()
@@ -62,11 +71,7 @@ export default class Controllers
         this.controllerGrip2.add( this.controllerModelFactory.createControllerModel( this.controllerGrip2 ) )
         this.scene.add( this.controllerGrip2 )
 
-        if(this.controller2.gamepad){
-            this.controller2.add(this.line)
-        } else {
-            this.controller2.add(this.line2)
-        }
+
 
     }
 
@@ -81,7 +86,10 @@ export default class Controllers
 
     update()
     {
-
+        if(this.connection){
+            this.button_end()
+            this.button_start()
+        }
     }
     button_start(){
         if(this.controller2.gamepad){
