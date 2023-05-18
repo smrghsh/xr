@@ -98,6 +98,8 @@ export default class Experience {
     //https://github.com/mrdoob/three.js/blob/master/examples/webgl_interactive_cubes.html
 
     //change this to be controller if controller is active
+    this.controllers.button_end()
+    this.controllers.button_start()
     this.raycaster.setFromCamera(this.mouse, this.camera.instance);
     // console.log(this.mouse)
     // TODO, make raycaster its own class
