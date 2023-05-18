@@ -46,10 +46,7 @@ export default class Controllers
             if(event.data.gamepad){
                 console.log("not null")
                 this.controller2.gamepad = event.data.gamepad
-                this.controller2.add(this.line)
-            } else{
-                this.controller2.add(this.line2)
-            }
+            } 
         });
         this.scene.add( this.controller2 );
         
@@ -64,6 +61,12 @@ export default class Controllers
         this.controllerGrip2 = this.renderer.instance.xr.getControllerGrip( 1 )
         this.controllerGrip2.add( this.controllerModelFactory.createControllerModel( this.controllerGrip2 ) )
         this.scene.add( this.controllerGrip2 )
+
+        if(this.controller2.gamepad){
+            this.controller2.add(this.line)
+        } else {
+            this.controller2.add(this.line2)
+        }
 
     }
 
