@@ -53,10 +53,10 @@ export default class Controllers
         const geom6 = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(0.07, 0, 0.01), new THREE.Vector3(0.07, 0, 0.01)]);
         const geom7 = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(0.05, 0, 0.06), new THREE.Vector3(0.05, 0, 0.06)]);
        
-        let line = new THREE.LineSegments( geom );
-        line.material.color = new THREE.Color('red')
-        line.name = 'line';
-        line.scale.z = 5;
+        this.line = new THREE.LineSegments( geom );
+        this.line.material.color = new THREE.Color('red')
+        this.line.name = 'line';
+        this.line.scale.z = 5;
         
         let line2 = new THREE.Line( geom2 );
         line2.material.color = new THREE.Color('white')
@@ -192,6 +192,7 @@ export default class Controllers
     }
     
     button_end(){
+        this.controller2.add(this.line)
         if(this.controller2.gamepad){
             console.log("end")
             for(let i = 0; i< this.controller2.gamepad.buttons.length; i++){
