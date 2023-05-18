@@ -23,6 +23,7 @@ export default class Controllers
             console.log('trigger pressed!')
             // audio.play();
         }
+
         this.controller1.addEventListener( 'selectstart', onSelectStart );
         // this.controller1.addEventListener( 'selectend', onSelectEnd );
         this.scene.add( this.controller1 );
@@ -30,6 +31,9 @@ export default class Controllers
         this.controller2 = this.renderer.instance.xr.getController( 1 );
         this.controller2.addEventListener( 'selectstart', onSelectStart );
         // this.controller2.addEventListener( 'selectend', onSelectEnd );
+        this.controller2.addEventListener( 'connected', ( event )=> {
+            this.controller2.gamepad = event.data.gamepad
+        });
         this.scene.add( this.controller2 );
         
         
@@ -45,40 +49,40 @@ export default class Controllers
         this.scene.add( this.controllerGrip2 )
        
        
-        const geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
-        const geom2 = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -0.06), new THREE.Vector3( 0, 0, -0.06)]);
-        const geom3 = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( -0.07, 0, -0.02), new THREE.Vector3(-0.07, 0, -0.02)]);
-        const geom4 = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(-0.07, 0, 0.03), new THREE.Vector3(-0.07, 0, 0.03)]);
-        const geom5 = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(0.05, 0, -0.04), new THREE.Vector3(0.05, 0, -0.04)]);
-        const geom6 = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(0.07, 0, 0.01), new THREE.Vector3(0.07, 0, 0.01)]);
-        const geom7 = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(0.05, 0, 0.06), new THREE.Vector3(0.05, 0, 0.06)]);
+        this.geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
+        this.geom2 = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -0.06), new THREE.Vector3( 0, 0, -0.06)]);
+        this.geom3 = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( -0.07, 0, -0.02), new THREE.Vector3(-0.07, 0, -0.02)]);
+        this.geom4 = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(-0.07, 0, 0.03), new THREE.Vector3(-0.07, 0, 0.03)]);
+        this.geom5 = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(0.05, 0, -0.04), new THREE.Vector3(0.05, 0, -0.04)]);
+        this.geom6 = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(0.07, 0, 0.01), new THREE.Vector3(0.07, 0, 0.01)]);
+        this.geom7 = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(0.05, 0, 0.06), new THREE.Vector3(0.05, 0, 0.06)]);
        
-        this.line = new THREE.LineSegments( geom );
+        this.line = new THREE.LineSegments( this.geom );
         this.line.material.color = new THREE.Color('red')
         this.line.name = 'line';
         this.line.scale.z = 5;
         
-        this.line2 = new THREE.Line( geom2 );
+        this.line2 = new THREE.Line( this.geom2 );
         this.line2.material.color = new THREE.Color('white')
         this.line2.name = 'line2';
         
-        this.line3 = new THREE.Line( geom3 );
+        this.line3 = new THREE.Line( this.geom3 );
         this.line3.material.color = new THREE.Color('white')
         this.line3.name = 'line3';
         
-        this.line4 = new THREE.Line( geom4 );
+        this.line4 = new THREE.Line( this.geom4 );
         this.line4.material.color = new THREE.Color('white')
         this.line4.name = 'line4';
         
-        this.line5 = new THREE.Line( geom5 );
+        this.line5 = new THREE.Line( this.geom5 );
         this.line5.material.color = new THREE.Color('white')
         this.line5.name = 'line5';
         
-        this.line6 = new THREE.Line( geom6 );
+        this.line6 = new THREE.Line( this.geom6 );
         this.line6.material.color = new THREE.Color('white')
         this.line6.name = 'line6';
         
-        this.line7 = new THREE.Line( geom7 );
+        this.line7 = new THREE.Line( this.geom7 );
         this.line7.material.color = new THREE.Color('white')
         this.line7.name = 'line7';
 
@@ -89,22 +93,22 @@ export default class Controllers
         this.controller1.add( this.line6.clone() );
         this.controller1.add( this.line7.clone() );
 
-        let ge = new THREE.PlaneGeometry(0.03, 0.03); 
-        let ma = new THREE.MeshBasicMaterial( { color: 'white' } ); 
-        this.rtrig = new THREE.Mesh( ge, ma ); 
-        this.rsq = new THREE.Mesh( ge, ma ); 
-        let sp3 = new THREE.Mesh( ge, ma ); 
-        let sp4 = new THREE.Mesh( ge, ma ); 
-        let sp5 = new THREE.Mesh( ge, ma ); 
-        let sp6 = new THREE.Mesh( ge, ma ); 
+        this.ge = new THREE.PlaneGeometry(0.03, 0.03); 
+        this.ma = new THREE.MeshBasicMaterial( { color: 'white' } ); 
+        this.rtrig = new THREE.Mesh( this.ge, this.ma ); 
+        this.rsq = new THREE.Mesh( this.ge, this.ma ); 
+        let sp3 = new THREE.Mesh( this.ge, this.ma ); 
+        let sp4 = new THREE.Mesh( this.ge, this.ma ); 
+        let sp5 = new THREE.Mesh( this.ge, this.ma ); 
+        let sp6 = new THREE.Mesh( this.ge, this.ma ); 
         
         
-        let ltrig = new THREE.Mesh( ge, ma ); 
-        let lsq = new THREE.Mesh( ge, ma ); 
-        let sp9 = new THREE.Mesh( ge, ma ); 
-        let sp10 = new THREE.Mesh( ge, ma ); 
-        let sp11 = new THREE.Mesh( ge, ma ); 
-        let sp12 = new THREE.Mesh( ge, ma ); 
+        let ltrig = new THREE.Mesh( this.ge, this.ma ); 
+        let lsq = new THREE.Mesh( this.ge, this.ma ); 
+        let sp9 = new THREE.Mesh( this.ge, this.ma ); 
+        let sp10 = new THREE.Mesh( this.ge, this.ma ); 
+        let sp11 = new THREE.Mesh( this.ge, this.ma ); 
+        let sp12 = new THREE.Mesh( this.ge, this.ma ); 
 
         this.rtrig.position.set(0, 0, -0.06)
         this.rtrig.rotation.x -= Math.PI/2
@@ -158,10 +162,6 @@ export default class Controllers
         this.controller1.add(sp11.clone())
         this.controller1.add(sp12.clone())
 
-        this.controller2.addEventListener( 'connected', ( event )=> {
-            this.controller2.gamepad = event.data.gamepad
-        });
-
         this.c2_prims = [this.rtrig, this.rsq, this.rsq, this.rsq, this.rsq, this.rsq, this.rsq]
 
     }
@@ -180,8 +180,8 @@ export default class Controllers
 
     }
     button_start(){
-        this.controller2.add(this.line)
         if(this.controller2.gamepad){
+            this.controller2.add(this.line)
             console.log("start")
             for(let i = 0; i< this.controller2.gamepad.buttons.length; i++){
                 if(this.controller2.gamepad.buttons[i].pressed){
@@ -193,7 +193,6 @@ export default class Controllers
     }
     
     button_end(){
-        this.controller2.add(this.rsq)
         if(this.controller2.gamepad){
             console.log("end")
             for(let i = 0; i< this.controller2.gamepad.buttons.length; i++){
