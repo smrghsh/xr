@@ -52,16 +52,17 @@ export default class Experience {
     this.world = new World();
     this.camera = new Camera();
     this.renderer = new Renderer();
-
+    this.controllers = new Controllers();
+    this.hands = new Hands();
     this.renderer.instance.xr.enabled = true;
     document.body.appendChild(VRButton.createButton(this.renderer.instance));
     this.renderer.instance.setAnimationLoop(() => {
+      this.controllers.update();
       // tick();
       this.renderer.instance.render(this.scene, this.camera.instance);
     });
 
-    this.controllers = new Controllers();
-    this.hands = new Hands();
+
 
     this.raycaster = new THREE.Raycaster();
     this.mouse = new THREE.Vector2();
@@ -90,7 +91,6 @@ export default class Experience {
     this.camera.resize();
   }
   update() {
-    this.controllers.update()
     this.camera.update();
     // this.renderer.update()
     this.world.update();

@@ -90,6 +90,8 @@ export default class Controllers
             this.controller2.add(this.line2)
             this.button_end()
             this.button_start()
+        } else {
+            this.controller2.add(this.line)
         }
     }
     button_start(){
