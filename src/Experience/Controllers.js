@@ -15,48 +15,61 @@ export default class Controllers
         this.scene = this.experience.scene
         this.renderer = this.experience.renderer
         
-        this.geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
-        this.line = new THREE.LineSegments( this.geom );
-        this.line.material.color = new THREE.Color('red')
-        this.line.name = 'line';
-        this.line.scale.z = 5;
+        this.t_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -0.06), new THREE.Vector3( 0, 0, -0.06)]);
+        this.t_line = new THREE.LineSegments( this.t_geom );
+        this.t_line.material.color = new THREE.Color('white')
+        this.t_line.name = 'rt_line';
 
-        this.line2 = new THREE.LineSegments( this.geom );
-        this.line2.material.color = new THREE.Color('white')
-        this.line2.name = 'line2';
-        this.line2.scale.z = 5;
+        this.ui_geom = new THREE.PlaneGeometry(0.03, 0.03); 
+        this.ui_ma = new THREE.MeshBasicMaterial( { color: 'white' } ); 
+        this.trig = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
+        this.trig.position.set(0, 0, -0.06)
+        this.trig.rotation.x -= Math.PI/2
+
+        this.trigger = new THREE.Group()
+        this.trigger.add(this.t_line)
+        this.trigger.add(this.trig)
+
+        this.r_connection = false
+        this.l_connection = false
 
 
-
-        this.connection = false
-
-        this.controller1 = this.renderer.instance.xr.getController( 0 );
-        // var audio = new Audio('audio/common_voice_en_10.mp3');
-        // audio.play();   
         const onSelectStart = function(){
             console.log('trigger pressed!')
             // audio.play();
         }
 
+        this.controller1 = this.renderer.instance.xr.getController( 0 );
         this.controller1.addEventListener( 'selectstart', onSelectStart );
         // this.controller1.addEventListener( 'selectend', onSelectEnd );
-        this.scene.add( this.controller1 );
         
         this.controller2 = this.renderer.instance.xr.getController( 1 );
         this.controller2.addEventListener( 'selectstart', onSelectStart );
+        // var audio = new Audio('audio/common_voice_en_10.mp3');
+        // audio.play();   
+
+
         this.controller2.gamepad = undefined
+        this.controller1.gamepad = undefined
         // this.controller2.addEventListener( 'selectend', onSelectEnd );
         this.controller2.addEventListener( 'connected', ( event )=> {
             if(event.data.gamepad){
-                this.connection = true
-                console.log("not null V")
+                this.r_connection = true
                 this.controller2.gamepad = event.data.gamepad
-                console.log(this.controller2.gamepad)
-                console.log("bababoowie")
 
             } 
         });
 
+        this.controller1.addEventListener( 'connected', ( event )=> {
+            if(event.data.gamepad){
+                this.l_connection = true
+                this.controller1.gamepad = event.data.gamepad
+
+            } 
+        });
+
+
+        this.scene.add( this.controller1 );
         this.scene.add( this.controller2 );
         
 
@@ -85,32 +98,41 @@ export default class Controllers
 
     update()
     {
-        if(this.connection){
-            this.button_end()
-            this.button_start()
+        if(this.r_connection){
+            this.trigger_end()
+            this.trigger_start()
+        }
+        if(this.l_connection){
+            this.trigger_end()
+            this.trigger_start()
         }
     }
-    button_start(){
+    trigger_start(){
         if(this.controller2.gamepad){
-            console.log("start")
-            for(let i = 0; i< this.controller2.gamepad.buttons.length; i++){
-                if(this.controller2.gamepad.buttons[i].pressed){
-                    this.controller2.add(this.line)
-                }
+            if(this.controller2.gamepad.buttons[0].pressed){
+                this.controller2.add(this.trigger)
             }
     
         } 
+        if(this.controller1.gamepad){
+            if(this.controller1.gamepad.buttons[0].pressed){
+                    this.controller1.add(this.trigger)
+            }
+        } 
     }
     
-    button_end(){
+    
+    trigger_end(){
         if(this.controller2.gamepad){
-            console.log("end")
-            for(let i = 0; i< this.controller2.gamepad.buttons.length; i++){
-                if(!this.controller2.gamepad.buttons[i].pressed){
-                    this.controller2.remove(this.line)
-                }
+            if(!this.controller2.gamepad.buttons[0].pressed){
+                this.controller2.remove(this.trigger)
             }
     
+        } 
+        if(this.controller1.gamepad){
+            if(!this.controller1.gamepad.buttons[0].pressed){
+                this.controller1.remove(this.trigger)
+            }
         }
     }
 }
