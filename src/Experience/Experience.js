@@ -205,23 +205,23 @@ export default class Experience
         //     }
         // }
         
-        if ( this.intersects.length > 0 ) {
-            if ( this.INTERSECTED != intersects[ 0 ].object ) {
-                // if ( this.INTERSECTED ) this.INTERSECTED.material.color.setHex( this.INTERSECTED.currentHex );
-                // this.INTERSECTED = intersects[ 0 ].object;
-                // this.INTERSECTED.currentHex = this.INTERSECTED.material.color.getHex();
-                // this.INTERSECTED.material.color.setHex( 0xff0000 );
-                console.log('ahhhhhh',this.INTERSECTED)
+        // if ( this.intersects.length > 0 ) {
+        //     if ( this.INTERSECTED != intersects[ 0 ].object ) {
+        //         // if ( this.INTERSECTED ) this.INTERSECTED.material.color.setHex( this.INTERSECTED.currentHex );
+        //         // this.INTERSECTED = intersects[ 0 ].object;
+        //         // this.INTERSECTED.currentHex = this.INTERSECTED.material.color.getHex();
+        //         // this.INTERSECTED.material.color.setHex( 0xff0000 );
+        //         console.log('ahhhhhh',this.INTERSECTED)
 
-            }
-        } else {
+        //     }
+        // } else {
 
-            // if ( this.INTERSECTED ) this.INTERSECTED.material.color.setHex( this.INTERSECTED.currentHex );
-            // console.log('nahhhh')
+        //     // if ( this.INTERSECTED ) this.INTERSECTED.material.color.setHex( this.INTERSECTED.currentHex );
+        //     // console.log('nahhhh')
 
-            // this.INTERSECTED = null;
+        //     // this.INTERSECTED = null;
 
-        }
+        // }
     }
     destroy()
     {
