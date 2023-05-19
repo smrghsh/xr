@@ -13,6 +13,7 @@ import Controllers from './Controllers.js'
 /* Samantha's import */
 import { createText } from 'three/examples/jsm/webxr/Text2D.js';
 
+let INTERSECTED
 
 let instance = null
 
@@ -191,37 +192,26 @@ export default class Experience
         this.intersects = this.controllers.raycasting.raycaster.intersectObjects( this.menuMesh);
         console.log("this intersects",this.intersects.color)
         
-        for(const intersect of this.intersects)
-        {
-            console.log('heyyyyy')
-            // intersect.object.material.color.set('#0000ff')
+        if ( this.intersects.length > 0 ) {
+
+            if ( INTERSECTED != this.intersects[ 0 ].object ) {
+
+                if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+
+                INTERSECTED = this.intersects[ 0 ].object;
+                INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+                INTERSECTED.material.emissive.setHex( 0xff0000 );
+
+            }
+
+        } else {
+
+            if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+
+            INTERSECTED = null;
+
         }
-
-        // for(const object of objectsToTest)
-        // {
-        //     if(!intersects.find(intersect => intersect.object === object))
-        //     {
-        //         object.material.color.set('#ff0000')
-        //     }
-        // }
         
-        // if ( this.intersects.length > 0 ) {
-        //     if ( this.INTERSECTED != intersects[ 0 ].object ) {
-        //         // if ( this.INTERSECTED ) this.INTERSECTED.material.color.setHex( this.INTERSECTED.currentHex );
-        //         // this.INTERSECTED = intersects[ 0 ].object;
-        //         // this.INTERSECTED.currentHex = this.INTERSECTED.material.color.getHex();
-        //         // this.INTERSECTED.material.color.setHex( 0xff0000 );
-        //         console.log('ahhhhhh',this.INTERSECTED)
-
-        //     }
-        // } else {
-
-        //     // if ( this.INTERSECTED ) this.INTERSECTED.material.color.setHex( this.INTERSECTED.currentHex );
-        //     // console.log('nahhhh')
-
-        //     // this.INTERSECTED = null;
-
-        // }
     }
     destroy()
     {
