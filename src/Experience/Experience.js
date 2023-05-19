@@ -227,6 +227,7 @@ export default class Experience
                 const object = intersection.object;
                 object.material.emissive.r = 1;
                 intersected.push( object );
+                print('yayyyyyy')
 
                 line.scale.z = intersection.distance;
 
