@@ -194,7 +194,7 @@ export default class Experience
         for(const intersect of this.intersects)
         {
             console.log('heyyyyy')
-            intersect.object.material.color.set('#0000ff')
+            // intersect.object.material.color.set('#0000ff')
         }
 
         // for(const object of objectsToTest)
