@@ -117,7 +117,7 @@ export default class Experience
         this.tkMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff } );
         this.tkMaterial.metalness = 0.8;
         this.torusKnot = new THREE.Mesh( this.tkGeometry, this.tkMaterial );
-        this.torusKnot.position.set( 0, 5, - 2 );
+        this.torusKnot.position.set( 0, 1, - 2 );
         this.scene.add( this.torusKnot );
 
 
