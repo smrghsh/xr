@@ -189,28 +189,58 @@ export default class Experience
         
         //change this to be controller if controller is active
         // this.controllers.raycaster.setFromCamera( this.mouse, this.camera.instance );
-        this.intersects = this.controllers.raycasting.raycaster.intersectObjects( this.menuMesh);
+        this.intersects = this.controllers.controller1.raycasting.raycaster.intersectObjects( this.menuMesh);
         console.log("this intersects",this.intersects)
         
-        // if ( this.intersects.length > 0 ) {
+        //Samantha's Edits Pt 2//
 
-        //     if ( INTERSECTED != this.intersects[ 0 ].object ) {
+        function getIntersections( controller ) {
 
-        //         if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+            controller.updateMatrixWorld();
 
-        //         INTERSECTED = this.intersects[ 0 ].object;
-        //         INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-        //         INTERSECTED.material.emissive.setHex( 0xff0000 );
+            tempMatrix.identity().extractRotation( controller.matrixWorld );
 
-        //     }
+            raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
+            raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( tempMatrix );
 
-        // } else {
+            return raycaster.intersectObjects( group.children, false );
 
-        //     if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+        }
 
-        //     INTERSECTED = null;
+        function intersectObjects( controller ) {
 
-        // }
+            // Do not highlight in mobile-ar
+
+            if ( controller.userData.targetRayMode === 'screen' ) return;
+
+            // Do not highlight when already selected
+
+            if ( controller.userData.selected !== undefined ) return;
+
+            const line = controller.getObjectByName( 'line' );
+            const intersections = getIntersections( controller );
+
+            if ( intersections.length > 0 ) {
+
+                const intersection = intersections[ 0 ];
+
+                const object = intersection.object;
+                object.material.emissive.r = 1;
+                intersected.push( object );
+
+                line.scale.z = intersection.distance;
+
+            } else {
+
+                line.scale.z = 5;
+
+            }
+
+        }
+
+        intersectObjects(this.controllers.controller1 );
+		intersectObjects( this.controllers.controller2 );
+        // End of Samantha's Edits//
         
     }
     destroy()
