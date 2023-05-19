@@ -190,27 +190,27 @@ export default class Experience
         //change this to be controller if controller is active
         // this.controllers.raycaster.setFromCamera( this.mouse, this.camera.instance );
         this.intersects = this.controllers.raycasting.raycaster.intersectObjects( this.menuMesh);
-        console.log("this intersects",this.intersects.color)
+        console.log("this intersects",this.intersects)
         
-        if ( this.intersects.length > 0 ) {
+        // if ( this.intersects.length > 0 ) {
 
-            if ( INTERSECTED != this.intersects[ 0 ].object ) {
+        //     if ( INTERSECTED != this.intersects[ 0 ].object ) {
 
-                if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+        //         if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
 
-                INTERSECTED = this.intersects[ 0 ].object;
-                INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-                INTERSECTED.material.emissive.setHex( 0xff0000 );
+        //         INTERSECTED = this.intersects[ 0 ].object;
+        //         INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+        //         INTERSECTED.material.emissive.setHex( 0xff0000 );
 
-            }
+        //     }
 
-        } else {
+        // } else {
 
-            if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+        //     if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
 
-            INTERSECTED = null;
+        //     INTERSECTED = null;
 
-        }
+        // }
         
     }
     destroy()
