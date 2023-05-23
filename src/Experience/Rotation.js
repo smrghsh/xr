@@ -24,8 +24,11 @@ export default class Rotation
         this.controller2 = this.renderer.instance.xr.getController( 1 );
         this.controller2.addEventListener( 'selectstart', ( event )=> {
             console.log("Enabling rotate: ", this.start_x, this.start_y)
-            this.start_x = this.controller2.rotation.x;
-            this.start_y = this.controller2.rotation.y;
+            //this.start_x = this.controller2.rotation.x;
+            //this.start_y = this.controller2.rotation.y;
+            this.start_x = this.controller2.position.x;
+            this.start_y = this.controller2.position.y;
+            this.start_z = this.controller2.position.z;
             this.enable_rotate = true;
             console.log(this.controller2.position.distanceTo(this.cube.position));
         
@@ -37,13 +40,18 @@ export default class Rotation
     }
 
     update(){
-        if(this.enable_rotate && this.controller2.position.distanceTo(this.cube.position) < 2){
+        if(this.enable_rotate && this.controller2.position.distanceTo(this.cube.position) < 1){
+            /*
             let start_x_r = this.start_x - this.controller2.rotation.x
             let start_y_r = this.start_y - this.controller2.rotation.y
             this.cube.rotation.x += start_x_r * .4;
             this.cube.rotation.y += start_y_r * .4;
             this.start_x = this.controller2.rotation.x
             this.start_y = this.controller2.rotation.y
+            */
+            this.cube.position.x += this.start_x - this.controller2.position.x 
+            this.cube.position.y += this.start_y - this.controller2.position.y
+            this.cube.position.z += this.start_z - this.controller2.position.z
         }
 
     }
