@@ -16,31 +16,31 @@ export default class Controllers
         this.scene = this.experience.scene
         this.renderer = this.experience.renderer
         this.raycasting = new Raycasting()
-        this.t_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -0.06), new THREE.Vector3( 0, 0, -0.06)]);
-        this.t_line = new THREE.LineSegments( this.t_geom );
-        this.t_line.material.color = new THREE.Color('white')
-        this.t_line.name = 'rt_line';
+        // this.t_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -0.06), new THREE.Vector3( 0, 0, -0.06)]);
+        // this.t_line = new THREE.LineSegments( this.t_geom );
+        // this.t_line.material.color = new THREE.Color('white')
+        // this.t_line.name = 'rt_line';
 
-        this.ui_geom = new THREE.PlaneGeometry(0.03, 0.03); 
-        this.ui_ma = new THREE.MeshBasicMaterial( { color: 'white' } ); 
-        this.trig = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
-        this.trig.position.set(0, 0, -0.06)
-        this.trig.rotation.x -= Math.PI/2
+        // this.ui_geom = new THREE.PlaneGeometry(0.03, 0.03); 
+        // this.ui_ma = new THREE.MeshBasicMaterial( { color: 'white' } ); 
+        // this.trig = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
+        // this.trig.position.set(0, 0, -0.06)
+        // this.trig.rotation.x -= Math.PI/2
 
-        this.l_trigger = new THREE.Group()
-        this.l_trigger.add(this.t_line.clone())
-        this.l_trigger.add(this.trig.clone())
+        // this.l_trigger = new THREE.Group()
+        // this.l_trigger.add(this.t_line.clone())
+        // this.l_trigger.add(this.trig.clone())
 
-        this.r_trigger = new THREE.Group()
-        this.r_trigger.add(this.t_line.clone())
-        this.r_trigger.add(this.trig.clone())
+        // this.r_trigger = new THREE.Group()
+        // this.r_trigger.add(this.t_line.clone())
+        // this.r_trigger.add(this.trig.clone())
 
         this.r_connection = false
         this.l_connection = false
-        const onSelectStart = function(){
-            console.log('trigger pressed!')
-            // audio.play();
-        }
+        // const onSelectStart = function(){
+        //     console.log('trigger pressed!')
+        //     // audio.play();
+        // }
 
         this.controller1 = this.renderer.instance.xr.getController( 0 );
         this.controller1.addEventListener( 'selectstart', onSelectStart );
