@@ -12,9 +12,10 @@ export default class Rotation
         this.start_x;
         this.start_y;
 
-        const geometry = new THREE.BoxGeometry( 1, 1, 1 ); 
+        const geometry = new THREE.BoxGeometry( .7, .7, .7 ); 
         const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} ); 
         this.cube = new THREE.Mesh( geometry, material ); 
+        this.cube.position.z = 2;
         this.scene.add( this.cube );
 
 
