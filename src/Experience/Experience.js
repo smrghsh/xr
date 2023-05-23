@@ -65,7 +65,7 @@ export default class Experience
         /*SAMANTHA'S EDITS*/
 
         this.menuGeometry = new THREE.PlaneGeometry( 2, 3 );
-		this.menuMaterial = new THREE.MeshPhongMaterial( {
+		    this.menuMaterial = new THREE.MeshPhongMaterial( {
 			// opacity: 50,
             color: 'green', 
             // side: THREE.DoubleSide,
