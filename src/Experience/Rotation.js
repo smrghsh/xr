@@ -29,6 +29,9 @@ export default class Rotation
             this.start_x = this.controller2.position.x;
             this.start_y = this.controller2.position.y;
             this.start_z = this.controller2.position.z;
+
+            this.startingCubePos = this.cube.position
+
             this.outOfRange = false;
             this.enable_rotate = true;
             console.log(this.controller2.position.distanceTo(this.cube.position));
@@ -50,9 +53,9 @@ export default class Rotation
             this.start_x = this.controller2.rotation.x
             this.start_y = this.controller2.rotation.y
             */
-            this.cube.position.x = this.controller2.position.x 
-            this.cube.position.y = this.controller2.position.y
-            this.cube.position.z = this.controller2.position.z
+            this.cube.position.x = this.controller2.position.x - this.startingCubePos.x
+            this.cube.position.y = this.controller2.position.y - this.startingCubePos.y
+            this.cube.position.z = this.controller2.position.z - this.startingCubePos.z
         } else if (this.enable_rotate && this.controller2.position.distanceTo(this.cube.position) > 1){
             this.outOfRange = true;
         }
