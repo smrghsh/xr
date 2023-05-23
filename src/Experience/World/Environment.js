@@ -9,7 +9,7 @@ export default class Environment {
     this.debug = this.experience.debug;
 
     this.parameter = {
-      color: 0x000117,
+      color: 0x010117,
     };
 
     if (this.debug.active) {
