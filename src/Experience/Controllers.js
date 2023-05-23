@@ -31,8 +31,12 @@ export default class Controllers
         this.ls.position.set(0.05, 0, -0.06)
         this.ls.rotation.x -= Math.PI/2
 
+        this.bp = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
+        this.bp.position.set(-0.07, 0, 0)
+        this.bp.rotation.x -= Math.PI/2
+
         this.ap = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
-        this.ap.position.set(-0.07, 0, 0)
+        this.ap.position.set(-0.07, 0, 0.06)
         this.ap.rotation.x -= Math.PI/2
 
         this.t_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -0.06), new THREE.Vector3( 0, 0, -0.06)]);
@@ -50,10 +54,16 @@ export default class Controllers
         this.ls_line.material.color = new THREE.Color('white')
         this.ls_line.name = 'ls_line';
 
-        this.a_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(-0.07, 0, 0), new THREE.Vector3(-0.07, 0, 0)]);
+        this.b_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(-0.07, 0, 0), new THREE.Vector3(-0.07, 0, 0)]);
+        this.b_line = new THREE.LineSegments( this.b_geom );
+        this.b_line.material.color = new THREE.Color('white')
+        this.b_line.name = 'a_line';
+
+        this.a_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(-0.07, 0, 0.06), new THREE.Vector3(-0.07, 0, 0.06)]);
         this.a_line = new THREE.LineSegments( this.a_geom );
         this.a_line.material.color = new THREE.Color('white')
         this.a_line.name = 'a_line';
+
 
         this.l_trigger = new THREE.Group()
         this.l_trigger.add(this.t_line.clone())
@@ -70,6 +80,10 @@ export default class Controllers
         this.lsq = new THREE.Group()
         this.lsq.add(this.ls_line.clone())
         this.lsq.add(this.ls.clone())
+
+        this.b = new THREE.Group()
+        this.b.add(this.b_line.clone())
+        this.b.add(this.bp.clone())
 
         this.a = new THREE.Group()
         this.a.add(this.a_line.clone())
@@ -205,9 +219,12 @@ export default class Controllers
     }
     abxy_end(){
         if(this.controller2.gamepad){
-            if(!this.controller2.gamepad.buttons[3].pressed){
-                this.controller2.remove(this.a)
+            if(!this.controller2.gamepad.buttons[4].pressed){
+                this.controller2.remove(this.b)
             }    
+            if(!this.controller2.gamepad.buttons[5].pressed){
+                this.controller2.remove(this.a)
+            }
         } 
         // if(this.controller1.gamepad){
         //     if(!this.controller1.gamepad.buttons[1].pressed){
@@ -217,9 +234,12 @@ export default class Controllers
     }
     abxy_start(){
         if(this.controller2.gamepad){
-            if(this.controller2.gamepad.buttons[3].pressed){
+            if(this.controller2.gamepad.buttons[4].pressed){
+                this.controller2.add(this.b)
+            }  
+            if(this.controller2.gamepad.buttons[5].pressed){
                 this.controller2.add(this.a)
-            }    
+            }     
         } 
         // if(this.controller1.gamepad){
         //     if(!this.controller1.gamepad.buttons[1].pressed){
