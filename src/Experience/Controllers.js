@@ -27,6 +27,9 @@ export default class Controllers
         this.rs.position.set(-0.05, 0, -0.06)
         this.rs.rotation.x -= Math.PI/2
 
+        this.ls = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
+        this.ls.position.set(0.05, 0, 0.06)
+        this.ls.rotation.x -= Math.PI/2
 
 
         this.t_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -0.06), new THREE.Vector3( 0, 0, -0.06)]);
@@ -39,7 +42,10 @@ export default class Controllers
         this.rs_line.material.color = new THREE.Color('white')
         this.rs_line.name = 'rs_line';
 
-
+        this.ls_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0.05, 0, 0.06), new THREE.Vector3( 0.05, 0, 0.06)]);
+        this.ls_line = new THREE.LineSegments( this.rs_geom );
+        this.ls_line.material.color = new THREE.Color('white')
+        this.ls_line.name = 'ls_line';
 
 
         this.l_trigger = new THREE.Group()
@@ -53,6 +59,10 @@ export default class Controllers
         this.rsq = new THREE.Group()
         this.rsq.add(this.rs_line.clone())
         this.rsq.add(this.rs.clone())
+
+        this.lsq = new THREE.Group()
+        this.lsq.add(this.ls_line.clone())
+        this.lsq.add(this.ls.clone())
 
         this.r_connection = false
         this.l_connection = false
@@ -161,11 +171,21 @@ export default class Controllers
                 this.controller2.remove(this.rsq)
             }    
         } 
+        if(this.controller1.gamepad){
+            if(!this.controller1.gamepad.buttons[1].pressed){
+                this.controller1.remove(this.lsq)
+            }    
+        } 
     }
     squeeze_start(){
         if(this.controller2.gamepad){
             if(this.controller2.gamepad.buttons[1].pressed){
                 this.controller2.add(this.rsq)
+            }    
+        } 
+        if(this.controller1.gamepad){
+            if(this.controller1.gamepad.buttons[1].pressed){
+                this.controller1.add(this.lsq)
             }    
         } 
     }
