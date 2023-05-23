@@ -30,7 +30,8 @@ export default class Rotation
             this.start_y = this.controller2.position.y;
             this.start_z = this.controller2.position.z;
 
-            this.startingCubePos = new THREE.Vector3(this.start_x, this.start_y, this.start_z) - this.cube.position;
+            this.startingCubePos = new THREE.Vector3(this.start_x, this.start_y, this.start_z);
+            this.startingCubePos.sub(this.cube.position);
             console.log(this.startingCubePos)
 
             this.outOfRange = false;
