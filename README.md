@@ -15,3 +15,5 @@ In order to debug web content, see [Debug Browser Content](https://developer.ocu
 
 Cloudflare pages:
 [https://xr-2mq.pages.dev/](https://xr-2mq.pages.dev/)
+
+[menu](https://menu.xr-2mq.pages.dev)
