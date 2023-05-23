@@ -11,6 +11,7 @@ import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import Controllers from "./Controllers.js";
 import Hands from "./Hands.js";
 import Locomotion from './Locomotion.js';
+import Rotation from "./Rotation.js";
 
 
 let instance = null;
@@ -56,10 +57,13 @@ export default class Experience {
     this.renderer = new Renderer();
     this.controllers = new Controllers();
     this.hands = new Hands();
+    this.rotation = new Rotation()
     this.renderer.instance.xr.enabled = true;
     document.body.appendChild(VRButton.createButton(this.renderer.instance));
     this.renderer.instance.setAnimationLoop(() => {
       this.controllers.update();
+      this.rotation.update();
+
       // tick();
       // this.locomotion.teleportVR.update(this.locomotion.elevationMeshList);
       this.renderer.instance.render(this.scene, this.camera.instance);
