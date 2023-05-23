@@ -46,12 +46,12 @@ export default class Controllers
         this.rs_line.name = 'rs_line';
 
         this.ls_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0.05, 0, -0.06), new THREE.Vector3( 0.05, 0, -0.06)]);
-        this.ls_line = new THREE.LineSegments( this.rs_geom );
+        this.ls_line = new THREE.LineSegments( this.ls_geom );
         this.ls_line.material.color = new THREE.Color('white')
         this.ls_line.name = 'ls_line';
 
         this.a_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(-0.07, 0, 0), new THREE.Vector3(-0.07, 0, 0)]);
-        this.a_line = new THREE.LineSegments( this.rs_geom );
+        this.a_line = new THREE.LineSegments( this.a_geom );
         this.a_line.material.color = new THREE.Color('white')
         this.a_line.name = 'a_line';
 
@@ -147,6 +147,9 @@ export default class Controllers
         this.trigger_start()
         this.squeeze_end()
         this.squeeze_start()
+        this.abxy_end()
+        this.abxy_start()
+
     }
     trigger_start(){
         if(this.controller2.gamepad){
