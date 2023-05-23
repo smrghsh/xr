@@ -23,7 +23,7 @@ export default class Environment {
     }
 
     console.log(this.parameter.color);
-    this.scene.background = new THREE.Color(this.parameter.color);
+    this.scene.background = new THREE.Color("beige");
 
     // this.setSunLight()
     this.setAmbientLight();
