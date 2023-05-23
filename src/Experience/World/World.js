@@ -4,6 +4,7 @@ import Environment from './Environment.js'
 import Floor from './Floor.js'
 import Spectra from './Spectra.js'
 import Stars from './Stars.js'
+import Torus from './Torus.js'
 
 export default class World
 {
@@ -14,6 +15,7 @@ export default class World
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.floor = new Floor()
+        
         // this.circles = new Circles()
         // this.hypercube = new Hypercube()
         // Wait for resources
@@ -25,7 +27,8 @@ export default class World
             this.stars = new Stars()
             this.spectra = new Spectra()
             // this.sushi = new Sushi()
-            
+            this.torus = new Torus()
+            console.log("torus created")
             this.environment = new Environment()
         })
     }

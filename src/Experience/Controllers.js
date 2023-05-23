@@ -1,10 +1,11 @@
 import * as THREE from 'three'
 import Experience from './Experience.js'
+import Raycasting from './Raycasting.js'
 import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js';
 import { Controller } from 'lil-gui';
 
 //Samantha
-
+console.log("listen")
 export default class Controllers
 {
     constructor()
@@ -14,7 +15,7 @@ export default class Controllers
         this.sizes = this.experience.sizes
         this.scene = this.experience.scene
         this.renderer = this.experience.renderer
-        
+        this.raycasting = new Raycasting()
         this.t_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -0.06), new THREE.Vector3( 0, 0, -0.06)]);
         this.t_line = new THREE.LineSegments( this.t_geom );
         this.t_line.material.color = new THREE.Color('white')
@@ -36,8 +37,6 @@ export default class Controllers
 
         this.r_connection = false
         this.l_connection = false
-
-
         const onSelectStart = function(){
             console.log('trigger pressed!')
             // audio.play();
@@ -48,6 +47,7 @@ export default class Controllers
         // this.controller1.addEventListener( 'selectend', onSelectEnd );
         
         this.controller2 = this.renderer.instance.xr.getController( 1 );
+        
         this.controller2.addEventListener( 'selectstart', onSelectStart );
         // var audio = new Audio('audio/common_voice_en_10.mp3');
         // audio.play();   
@@ -88,6 +88,9 @@ export default class Controllers
         this.scene.add( this.controllerGrip2 )
 
 
+        //raycasting//
+        this.controller1.add( this.raycasting.line.clone() );
+		this.controller2.add( this.raycasting.line.clone() );
 
     }
 
