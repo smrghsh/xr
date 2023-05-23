@@ -7,6 +7,7 @@ export default class Rotation
     {
         this.experience = new Experience();
         this.renderer = this.experience.renderer
+        this.scene = this.experience.scene
         let enable_rotate = false;
         let start_x;
         let start_y;
@@ -14,7 +15,7 @@ export default class Rotation
         const geometry = new THREE.BoxGeometry( 1, 1, 1 ); 
         const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} ); 
         this.cube = new THREE.Mesh( geometry, material ); 
-        scene.add( this.cube );
+        this.scene.add( this.cube );
 
 
 
