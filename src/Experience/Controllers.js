@@ -28,9 +28,12 @@ export default class Controllers
         this.rs.rotation.x -= Math.PI/2
 
         this.ls = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
-        this.ls.position.set(0.05, 0, 0.06)
+        this.ls.position.set(0.05, 0, -0.06)
         this.ls.rotation.x -= Math.PI/2
 
+        this.ap = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
+        this.ap.position.set(-0.07, 0, 0)
+        this.ap.rotation.x -= Math.PI/2
 
         this.t_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -0.06), new THREE.Vector3( 0, 0, -0.06)]);
         this.t_line = new THREE.LineSegments( this.t_geom );
@@ -42,11 +45,15 @@ export default class Controllers
         this.rs_line.material.color = new THREE.Color('white')
         this.rs_line.name = 'rs_line';
 
-        this.ls_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0.05, 0, 0.06), new THREE.Vector3( 0.05, 0, 0.06)]);
+        this.ls_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0.05, 0, -0.06), new THREE.Vector3( 0.05, 0, -0.06)]);
         this.ls_line = new THREE.LineSegments( this.rs_geom );
         this.ls_line.material.color = new THREE.Color('white')
         this.ls_line.name = 'ls_line';
 
+        this.a_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(-0.07, 0, 0), new THREE.Vector3(-0.07, 0, 0)]);
+        this.a_line = new THREE.LineSegments( this.rs_geom );
+        this.a_line.material.color = new THREE.Color('white')
+        this.a_line.name = 'a_line';
 
         this.l_trigger = new THREE.Group()
         this.l_trigger.add(this.t_line.clone())
@@ -63,6 +70,10 @@ export default class Controllers
         this.lsq = new THREE.Group()
         this.lsq.add(this.ls_line.clone())
         this.lsq.add(this.ls.clone())
+
+        this.a = new THREE.Group()
+        this.a.add(this.a_line.clone())
+        this.a.add(this.ap.clone())
 
         this.r_connection = false
         this.l_connection = false
@@ -188,5 +199,29 @@ export default class Controllers
                 this.controller1.add(this.lsq)
             }    
         } 
+    }
+    abxy_end(){
+        if(this.controller2.gamepad){
+            if(!this.controller2.gamepad.buttons[3].pressed){
+                this.controller2.remove(this.a)
+            }    
+        } 
+        // if(this.controller1.gamepad){
+        //     if(!this.controller1.gamepad.buttons[1].pressed){
+        //         this.controller1.remove(this.lsq)
+        //     }    
+        // } 
+    }
+    abxy_start(){
+        if(this.controller2.gamepad){
+            if(this.controller2.gamepad.buttons[3].pressed){
+                this.controller2.add(this.a)
+            }    
+        } 
+        // if(this.controller1.gamepad){
+        //     if(!this.controller1.gamepad.buttons[1].pressed){
+        //         this.controller1.remove(this.lsq)
+        //     }    
+        // } 
     }
 }
