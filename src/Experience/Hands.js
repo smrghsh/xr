@@ -4,6 +4,7 @@ import { XRControllerModelFactory } from "three/examples/jsm/webxr/XRControllerM
 // import { OculusHandModel } from 'three/addons/webxr/OculusHandModel.js';
 // import { OculusHandPointerModel } from 'three/addons/webxr/OculusHandPointerModel.js';
 import { XRHandModelFactory } from "three/examples/jsm/webxr/XRHandModelFactory.js";
+import { Handy } from "./Handy.js";
 
 export default class Hands {
   constructor() {
@@ -18,7 +19,7 @@ export default class Hands {
     this.hand1.userData.currentHandModel = 0;
     this.scene.add(this.hand1);
 
-    this.handModelFactory = new XRHandModelFactory()
+    this.handModelFactory = new XRHandModelFactory();
     this.hleft = this.handModelFactory.createHandModel(this.hand1, "boxes");
     this.hand1.add(this.hleft);
     this.hand1.addEventListener("pinchend", function () {});
@@ -32,6 +33,19 @@ export default class Hands {
     this.hright = this.handModelFactory.createHandModel(this.hand2, "boxes");
     this.hand2.add(this.hright);
     this.hand2.addEventListener("pinchend", function () {});
+
+    Handy.makeHandy(this.hand1);
+    Handy.makeHandy(this.hand2);
+
+    this.handLeft = Handy.hands.getLeft();
+    this.handRight = Handy.hands.getLeft();
+
+    const isPeace = handLeft.isPose("peace");
+    if (isPeace) {
+      console.log(isPeace.distance);
+    }
+
+    Handy.update();
   }
 
   setInstance() {}
