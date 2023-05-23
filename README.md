@@ -12,6 +12,11 @@ In order to test on a headset, use `npm run build` to create a build to the `/do
 
 In order to debug web content, see [Debug Browser Content](https://developer.oculus.com/documentation/web/browser-remote-debugging/). The general steps are to install Meta Quest Developer Hub, and use Chrome on the desktop to inspect web browser on the VR device
 
+### We're now using cloudflare pages to help facilitate previews of branches
 
-Cloudflare pages:
+Main branch:
+
 [https://xr-2mq.pages.dev/](https://xr-2mq.pages.dev/)
+
+What another branch would appear as:
+[branch-name].xr-2mq.pages.dev
