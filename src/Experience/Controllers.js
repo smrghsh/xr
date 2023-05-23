@@ -39,6 +39,16 @@ export default class Controllers
         this.ap.position.set(-0.07, 0, 0.06)
         this.ap.rotation.x -= Math.PI/2
 
+        this.yp = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
+        this.yp.position.set(0.07, 0, 0)
+        this.yp.rotation.x -= Math.PI/2
+
+        this.xp = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
+        this.xp.position.set(0.07, 0, 0.06)
+        this.xp.rotation.x -= Math.PI/2
+
+
+
         this.t_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -0.06), new THREE.Vector3( 0, 0, -0.06)]);
         this.t_line = new THREE.LineSegments( this.t_geom );
         this.t_line.material.color = new THREE.Color('white')
@@ -57,12 +67,23 @@ export default class Controllers
         this.b_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(-0.07, 0, 0), new THREE.Vector3(-0.07, 0, 0)]);
         this.b_line = new THREE.LineSegments( this.b_geom );
         this.b_line.material.color = new THREE.Color('white')
-        this.b_line.name = 'a_line';
+        this.b_line.name = 'b_line';
 
         this.a_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(-0.07, 0, 0.06), new THREE.Vector3(-0.07, 0, 0.06)]);
         this.a_line = new THREE.LineSegments( this.a_geom );
         this.a_line.material.color = new THREE.Color('white')
         this.a_line.name = 'a_line';
+
+        this.y_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(0.07, 0, 0), new THREE.Vector3(0.07, 0, 0)]);
+        this.y_line = new THREE.LineSegments( this.y_geom );
+        this.y_line.material.color = new THREE.Color('white')
+        this.y_line.name = 'y_line';
+
+        this.x_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3(0.07, 0, 0.06), new THREE.Vector3(0.07, 0, 0.06)]);
+        this.x_line = new THREE.LineSegments( this.x_geom );
+        this.x_line.material.color = new THREE.Color('white')
+        this.x_line.name = 'x_line';
+
 
 
         this.l_trigger = new THREE.Group()
@@ -88,6 +109,14 @@ export default class Controllers
         this.a = new THREE.Group()
         this.a.add(this.a_line.clone())
         this.a.add(this.ap.clone())
+
+        this.x = new THREE.Group()
+        this.x.add(this.x_line.clone())
+        this.x.add(this.xp.clone())
+
+        this.y = new THREE.Group()
+        this.y.add(this.y_line.clone())
+        this.y.add(this.yp.clone())
 
         this.r_connection = false
         this.l_connection = false
@@ -219,32 +248,38 @@ export default class Controllers
     }
     abxy_end(){
         if(this.controller2.gamepad){
-            if(!this.controller2.gamepad.buttons[4].pressed){
+            if(!this.controller2.gamepad.buttons[5].pressed){
                 this.controller2.remove(this.b)
             }    
-            if(!this.controller2.gamepad.buttons[5].pressed){
+            if(!this.controller2.gamepad.buttons[4].pressed){
                 this.controller2.remove(this.a)
             }
         } 
-        // if(this.controller1.gamepad){
-        //     if(!this.controller1.gamepad.buttons[1].pressed){
-        //         this.controller1.remove(this.lsq)
-        //     }    
-        // } 
+        if(this.controller1.gamepad){
+            if(!this.controller1.gamepad.buttons[5].pressed){
+                this.controller1.remove(this.y)
+            }    
+            if(!this.controller1.gamepad.buttons[4].pressed){
+                this.controller1.remove(this.x)
+            }
+        } 
     }
     abxy_start(){
         if(this.controller2.gamepad){
-            if(this.controller2.gamepad.buttons[4].pressed){
+            if(this.controller2.gamepad.buttons[5].pressed){
                 this.controller2.add(this.b)
             }  
-            if(this.controller2.gamepad.buttons[5].pressed){
+            if(this.controller2.gamepad.buttons[4].pressed){
                 this.controller2.add(this.a)
             }     
         } 
-        // if(this.controller1.gamepad){
-        //     if(!this.controller1.gamepad.buttons[1].pressed){
-        //         this.controller1.remove(this.lsq)
-        //     }    
-        // } 
+        if(this.controller1.gamepad){
+            if(this.controller1.gamepad.buttons[5].pressed){
+                this.controller1.add(this.y)
+            }    
+            if(this.controller1.gamepad.buttons[4].pressed){
+                this.controller1.add(this.x)
+            }
+        } 
     }
 }
