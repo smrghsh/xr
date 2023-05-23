@@ -15,7 +15,8 @@ export default class Rotation
         const geometry = new THREE.BoxGeometry( .7, .7, .7 ); 
         const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} ); 
         this.cube = new THREE.Mesh( geometry, material ); 
-        this.cube.position.z = 2;
+        this.cube.position.z = -1;
+        this.cube.position.y = 1;
         this.scene.add( this.cube );
 
 
@@ -26,6 +27,7 @@ export default class Rotation
             this.start_x = this.controller2.rotation.x;
             this.start_y = this.controller2.rotation.y;
             this.enable_rotate = true;
+            console.log(this.controller2.position.distanceTo(this.cube.position));
         
         });
         this.controller2.addEventListener( 'selectend', ( event )=> {
@@ -35,7 +37,7 @@ export default class Rotation
     }
 
     update(){
-        if(this.enable_rotate){
+        if(this.enable_rotate && this.controller2.position.distanceTo(this.cube.position) < 2){
             let start_x_r = this.start_x - this.controller2.rotation.x
             let start_y_r = this.start_y - this.controller2.rotation.y
             this.cube.rotation.x += start_x_r * .4;
