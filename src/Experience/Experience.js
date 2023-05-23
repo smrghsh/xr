@@ -10,6 +10,8 @@ import sources from "./sources.js";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import Controllers from "./Controllers.js";
 import Hands from "./Hands.js";
+import Locomotion from './Locomotion.js';
+
 
 let instance = null;
 
@@ -59,6 +61,7 @@ export default class Experience {
     this.renderer.instance.setAnimationLoop(() => {
       this.controllers.update();
       // tick();
+      // this.locomotion.teleportVR.update(this.locomotion.elevationMeshList);
       this.renderer.instance.render(this.scene, this.camera.instance);
     });
 

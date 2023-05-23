@@ -12,6 +12,7 @@ export default class Hands {
     this.sizes = this.experience.sizes;
     this.scene = this.experience.scene;
     this.renderer = this.experience.renderer;
+    this.handModelFactory = new XRHandModelFactory();
 
     this.hand1 = this.renderer.instance.xr.getHand(0);
     this.hand1.userData.currentHandModel = 0;
