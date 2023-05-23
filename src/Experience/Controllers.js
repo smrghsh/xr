@@ -14,17 +14,33 @@ export default class Controllers
         this.sizes = this.experience.sizes
         this.scene = this.experience.scene
         this.renderer = this.experience.renderer
-        
+       
+       
+        this.ui_geom = new THREE.PlaneGeometry(0.03, 0.03); 
+        this.ui_ma = new THREE.MeshBasicMaterial( { color: 'white' } ); 
+       
+        this.trig = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
+        this.trig.position.set(0, 0, -0.06)
+        this.trig.rotation.x -= Math.PI/2
+
+        this.rs = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
+        this.rs.position.set(-0.05, 0, -0.06)
+        this.rs.rotation.x -= Math.PI/2
+
+
+
         this.t_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -0.06), new THREE.Vector3( 0, 0, -0.06)]);
         this.t_line = new THREE.LineSegments( this.t_geom );
         this.t_line.material.color = new THREE.Color('white')
         this.t_line.name = 'rt_line';
 
-        this.ui_geom = new THREE.PlaneGeometry(0.03, 0.03); 
-        this.ui_ma = new THREE.MeshBasicMaterial( { color: 'white' } ); 
-        this.trig = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
-        this.trig.position.set(0, 0, -0.06)
-        this.trig.rotation.x -= Math.PI/2
+        this.rs_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( -0.05, 0, -0.06), new THREE.Vector3( -0.05, 0, -0.06)]);
+        this.rs_line = new THREE.LineSegments( this.rs_geom );
+        this.rs_line.material.color = new THREE.Color('white')
+        this.rs_line.name = 'rs_line';
+
+
+
 
         this.l_trigger = new THREE.Group()
         this.l_trigger.add(this.t_line.clone())
@@ -33,6 +49,10 @@ export default class Controllers
         this.r_trigger = new THREE.Group()
         this.r_trigger.add(this.t_line.clone())
         this.r_trigger.add(this.trig.clone())
+
+        this.rsq = new THREE.Group()
+        this.rsq.add(this.rs_line.clone())
+        this.rsq.add(this.rs.clone())
 
         this.r_connection = false
         this.l_connection = false
@@ -102,14 +122,10 @@ export default class Controllers
 
     update()
     {
-        if(this.r_connection){
-            this.trigger_end()
-            this.trigger_start()
-        }
-        if(this.l_connection){
-            this.trigger_end()
-            this.trigger_start()
-        }
+        this.trigger_end()
+        this.trigger_start()
+        this.squeeze_end()
+        this.squeeze_start()
     }
     trigger_start(){
         if(this.controller2.gamepad){
@@ -138,5 +154,19 @@ export default class Controllers
                 this.controller1.remove(this.l_trigger)
             }
         }
+    }
+    squeeze_end(){
+        if(this.controller2.gamepad){
+            if(!this.controller2.gamepad.buttons[1].pressed){
+                this.controller2.remove(this.rsq)
+            }    
+        } 
+    }
+    squeeze_start(){
+        if(this.controller2.gamepad){
+            if(this.controller2.gamepad.buttons[1].pressed){
+                this.controller2.add(this.rsq)
+            }    
+        } 
     }
 }
