@@ -189,58 +189,58 @@ export default class Experience
         
         //change this to be controller if controller is active
         // this.controllers.raycaster.setFromCamera( this.mouse, this.camera.instance );
-        this.intersects = this.controllers.controller1.raycasting.raycaster.intersectObjects( this.menuMesh);
+        this.intersects = this.controllers.controller1.raycasting.raycaster.intersectObjects( this.torusKnot);
         console.log("this intersects",this.intersects)
         
         //Samantha's Edits Pt 2//
 
-        function getIntersections( controller ) {
+        // function getIntersections( this.controllers ) {
 
-            controller.updateMatrixWorld();
+        //     this.controllers.updateMatrixWorld();
 
-            tempMatrix.identity().extractRotation( controller.matrixWorld );
+        //     tempMatrix.identity().extractRotation( controller.matrixWorld );
 
-            raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
-            raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( tempMatrix );
+        //     this.controllers.controller1.raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
+        //     this.controllers.controller1.raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( tempMatrix );
 
-            return raycaster.intersectObjects( group.children, false );
+        //     return this.controllers.controller1.raycasting.raycaster.intersectObjects( this.menuMesh);
 
-        }
+        // }
 
-        function intersectObjects( controller ) {
+        // function intersectObjects( controller ) {
 
-            // Do not highlight in mobile-ar
+        //     // Do not highlight in mobile-ar
 
-            if ( controller.userData.targetRayMode === 'screen' ) return;
+        //     if ( controller.userData.targetRayMode === 'screen' ) return;
 
-            // Do not highlight when already selected
+        //     // Do not highlight when already selected
 
-            if ( controller.userData.selected !== undefined ) return;
+        //     if ( controller.userData.selected !== undefined ) return;
 
-            const line = controller.getObjectByName( 'line' );
-            const intersections = getIntersections( controller );
+        //     const line = controller.getObjectByName( 'line' );
+        //     const intersections = getIntersections( controller );
 
-            if ( intersections.length > 0 ) {
+        //     if ( intersections.length > 0 ) {
 
-                const intersection = intersections[ 0 ];
+        //         const intersection = intersections[ 0 ];
 
-                const object = intersection.object;
-                object.material.emissive.r = 1;
-                intersected.push( object );
-                print('yayyyyyy')
+        //         const object = intersection.object;
+        //         object.material.emissive.r = 1;
+        //         intersected.push( object );
+        //         print('yayyyyyy')
 
-                line.scale.z = intersection.distance;
+        //         line.scale.z = intersection.distance;
 
-            } else {
+        //     } else {
 
-                line.scale.z = 5;
+        //         line.scale.z = 5;
 
-            }
+        //     }
 
-        }
+        // }
 
-        intersectObjects(this.controllers.controller1 );
-		intersectObjects( this.controllers.controller2 );
+        // intersectObjects(this.controllers.controller1 );
+		    // intersectObjects( this.controllers.controller2 );
         // End of Samantha's Edits//
     }
 }
