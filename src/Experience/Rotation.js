@@ -32,11 +32,8 @@ export default class Rotation
 
 
         this.controller2.addEventListener( 'selectstart', ( event )=> {
-            //this.start_x = this.controller2.rotation.x;
-            //this.start_y = this.controller2.rotation.y;
-            this.start_x = this.controller2.position.x;
-            this.start_y = this.controller2.position.y;
-            this.start_z = this.controller2.position.z;
+            this.start_x = this.controller2.rotation.x;
+            this.start_y = this.controller2.rotation.y;
 
             console.log("Enabling rotate: ", this.start_x, this.start_y)
             console.log('intersect cntrl & box: ', this.cubeBB.distanceToPoint(this.controller2.position))
@@ -44,11 +41,10 @@ export default class Rotation
 
             console.log('cube bb', this.cubeBB)
 
-            this.startingCubePos = new THREE.Vector3(this.start_x, this.start_y, this.start_z);
+            this.startingCubePos = new THREE.Vector3(this.controller2.position.x, this.controller2.position.y, this.controller2.position.z);
             this.startingCubePos.sub(this.cube.position);
             console.log(this.startingCubePos)
 
-            this.outOfRange = false;
             this.enable_rotate = true;
             console.log(this.controller2.position.distanceTo(this.cube.position));
         
@@ -65,19 +61,19 @@ export default class Rotation
 
         //Check Distance & make sure trigger held
         if(this.enable_rotate && this.cubeBB.distanceToPoint(this.controller2.position) < 0.2){
-            /*
+            
+            // Update rotation of object
             let start_x_r = this.start_x - this.controller2.rotation.x
             let start_y_r = this.start_y - this.controller2.rotation.y
-            this.cube.rotation.x += start_x_r * .4;
-            this.cube.rotation.y += start_y_r * .4;
+            this.cube.rotation.x += start_x_r * .6;
+            this.cube.rotation.y += start_y_r * .6;
             this.start_x = this.controller2.rotation.x
             this.start_y = this.controller2.rotation.y
-            */
+            
+            // Update position of object
             this.cube.position.x = this.controller2.position.x - this.startingCubePos.x
             this.cube.position.y = this.controller2.position.y - this.startingCubePos.y
             this.cube.position.z = this.controller2.position.z - this.startingCubePos.z
-        } else if (this.enable_rotate && this.controller2.position.distanceTo(this.cube.position) > 1){
-            this.outOfRange = true;
         }
 
     }
