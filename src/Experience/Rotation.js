@@ -34,12 +34,16 @@ export default class Rotation
 
 
         this.controller2.addEventListener( 'selectstart', ( event )=> {
-            console.log("Enabling rotate: ", this.start_x, this.start_y)
             //this.start_x = this.controller2.rotation.x;
             //this.start_y = this.controller2.rotation.y;
             this.start_x = this.controller2.position.x;
             this.start_y = this.controller2.position.y;
             this.start_z = this.controller2.position.z;
+
+            console.log("Enabling rotate: ", this.start_x, this.start_y)
+            console.log('intersect cntrl & box: ', this.controllerBB.intersectsBox(this.cubeBB))
+            console.log(this.controllerBB)
+            console.log(this.cubeBB)
 
             this.startingCubePos = new THREE.Vector3(this.start_x, this.start_y, this.start_z);
             this.startingCubePos.sub(this.cube.position);
