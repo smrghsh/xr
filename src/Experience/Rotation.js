@@ -41,7 +41,6 @@ export default class Rotation
             console.log("Enabling rotate: ", this.start_x, this.start_y)
             console.log('intersect cntrl & box: ', this.cubeBB.distanceToPoint(this.controller2.position))
 
-            this.cubeBB.copy( this.cube.geometry.boundingBox ).applyMatrix4( this.cube.matrixWorld );
 
             console.log('cube bb', this.cubeBB)
 
@@ -61,6 +60,10 @@ export default class Rotation
     }
 
     update(){
+        // Update BBs
+        this.cubeBB.copy( this.cube.geometry.boundingBox ).applyMatrix4( this.cube.matrixWorld );
+
+        //Check Distance & make sure trigger held
         if(this.enable_rotate && this.cubeBB.distanceToPoint(this.controller2.position) < 0.2){
             /*
             let start_x_r = this.start_x - this.controller2.rotation.x
