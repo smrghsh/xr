@@ -2,6 +2,11 @@ import * as THREE from 'three'
 import Experience from './Experience.js'
 
 export default class Rotation
+
+// To do: compute bounding box and see if it intersects with controller
+// Make it so that any object in group can be moved instead of hardcoded cube
+// fix rotation: https://stackoverflow.com/questions/21539695/three-js-rotation-not-respecting-local-orientation
+
 {
     constructor()
     {
@@ -19,9 +24,15 @@ export default class Rotation
         this.cube.position.y = 1;
         this.scene.add( this.cube );
 
+        this.cubeBB = new THREE.Box3().setFromObject(this.cube);
+
 
 
         this.controller2 = this.renderer.instance.xr.getController( 1 );
+
+        this.controllerBB = new THREE.Box3().setFromObject(this.controller2);
+
+
         this.controller2.addEventListener( 'selectstart', ( event )=> {
             console.log("Enabling rotate: ", this.start_x, this.start_y)
             //this.start_x = this.controller2.rotation.x;
@@ -46,7 +57,7 @@ export default class Rotation
     }
 
     update(){
-        if(this.enable_rotate && this.controller2.position.distanceTo(this.cube.position) < 1 && this.outOfRange == false){
+        if(this.enable_rotate && this.controllerBB.intersectsBox(this.cubeBB)){
             /*
             let start_x_r = this.start_x - this.controller2.rotation.x
             let start_y_r = this.start_y - this.controller2.rotation.y
