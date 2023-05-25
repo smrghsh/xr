@@ -238,10 +238,10 @@ export default class Controllers
         this.trigger_start()
         this.squeeze_end()
         this.squeeze_start()
-        // this.abxy_end()
-        // this.abxy_start()
-        // this.stick_end()
-        // this.stick_start()
+        this.abxy_end()
+        this.abxy_start()
+        this.stick_end()
+        this.stick_start()
 
     }
     trigger_start(){
