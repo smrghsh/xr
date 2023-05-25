@@ -12,6 +12,7 @@
     "vite-plugin-glsl": "^1.1.2"
   },
   "dependencies": {
+    "handy": "^0.0.13",
     "lil-gui": "^0.17.0",
     "teleportvr": "^3.0.4",
     "three": "^0.148.0"
