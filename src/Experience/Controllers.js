@@ -20,9 +20,13 @@ export default class Controllers
         this.ui_geom = new THREE.PlaneGeometry(0.03, 0.03); 
         this.ui_ma = new THREE.MeshBasicMaterial( { color: 'white' } ); 
        
-        this.trig = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
-        this.trig.position.set(0, 0, -0.06)
-        this.trig.rotation.x -= Math.PI/2
+        this.rtrig = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
+        this.rtrig.position.set(0, 0, -0.06)
+        this.rtrig.rotation.x -= Math.PI/2
+
+        this.ltrig = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
+        this.ltrig.position.set(0, 0, -0.06)
+        this.ltrig.rotation.x -= Math.PI/2
 
         this.rs = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
         this.rs.position.set(-0.05, 0, -0.06)
@@ -59,10 +63,15 @@ export default class Controllers
 
 
 
-        this.t_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -0.06), new THREE.Vector3( 0, 0, -0.06)]);
-        this.t_line = new THREE.LineSegments( this.t_geom );
-        this.t_line.material.color = new THREE.Color('white')
-        this.t_line.name = 'rt_line';
+        this.rt_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -0.06), new THREE.Vector3( 0, 0, -0.06)]);
+        this.rt_line = new THREE.LineSegments( this.rt_geom );
+        this.rt_line.material.color = new THREE.Color('white')
+        this.rt_line.name = 'rt_line';
+
+        this.lt_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -0.06), new THREE.Vector3( 0, 0, -0.06)]);
+        this.lt_line = new THREE.LineSegments( this.lt_geom );
+        this.lt_line.material.color = new THREE.Color('white')
+        this.lt_line.name = 'lt_line';
 
         this.rs_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( -0.05, 0, -0.06), new THREE.Vector3( -0.05, 0, -0.06)]);
         this.rs_line = new THREE.LineSegments( this.rs_geom );
@@ -108,44 +117,44 @@ export default class Controllers
 
 
         this.l_trigger = new THREE.Group()
-        this.l_trigger.add(this.t_line.clone())
-        this.l_trigger.add(this.trig.clone())
+        this.l_trigger.add(this.lt_line)
+        this.l_trigger.add(this.ltrig)
 
         this.r_trigger = new THREE.Group()
-        this.r_trigger.add(this.t_line.clone())
-        this.r_trigger.add(this.trig.clone())
+        this.r_trigger.add(this.rt_line)
+        this.r_trigger.add(this.rtrig)
 
         this.rsq = new THREE.Group()
-        this.rsq.add(this.rs_line.clone())
-        this.rsq.add(this.rs.clone())
+        this.rsq.add(this.rs_line)
+        this.rsq.add(this.rs)
 
         this.lsq = new THREE.Group()
-        this.lsq.add(this.ls_line.clone())
-        this.lsq.add(this.ls.clone())
+        this.lsq.add(this.ls_line)
+        this.lsq.add(this.ls)
 
         this.b = new THREE.Group()
-        this.b.add(this.b_line.clone())
-        this.b.add(this.bp.clone())
+        this.b.add(this.b_line)
+        this.b.add(this.bp)
 
         this.a = new THREE.Group()
-        this.a.add(this.a_line.clone())
-        this.a.add(this.ap.clone())
+        this.a.add(this.a_line)
+        this.a.add(this.ap)
 
         this.x = new THREE.Group()
-        this.x.add(this.x_line.clone())
-        this.x.add(this.xp.clone())
+        this.x.add(this.x_line)
+        this.x.add(this.xp)
 
         this.y = new THREE.Group()
-        this.y.add(this.y_line.clone())
-        this.y.add(this.yp.clone())
+        this.y.add(this.y_line)
+        this.y.add(this.yp)
 
         this.lsti = new THREE.Group()
-        this.lsti.add(this.lst_line.clone())
-        this.lsti.add(this.lst.clone())
+        this.lsti.add(this.lst_line)
+        this.lsti.add(this.lst)
 
         this.rsti = new THREE.Group()
-        this.rsti.add(this.rst_line.clone())
-        this.rsti.add(this.rst.clone())
+        this.rsti.add(this.rst_line)
+        this.rsti.add(this.rst)
 
         this.r_connection = false
         this.l_connection = false
@@ -200,7 +209,17 @@ export default class Controllers
         this.controllerGrip2.add( this.controllerModelFactory.createControllerModel( this.controllerGrip2 ) )
         this.scene.add( this.controllerGrip2 )
 
+        this.controller1.add(this.l_trigger)
+        this.controller1.add(this.lsq)
+        this.controller1.add(this.x)
+        this.controller1.add(this.y)
+        this.controller1.add(this.lsti)
 
+        this.controller2.add(this.r_trigger)
+        this.controller2.add(this.rsq)
+        this.controller2.add(this.a)
+        this.controller2.add(this.b)
+        this.controller2.add(this.rsti)
 
     }
 
@@ -219,22 +238,24 @@ export default class Controllers
         this.trigger_start()
         this.squeeze_end()
         this.squeeze_start()
-        this.abxy_end()
-        this.abxy_start()
-        this.stick_end()
-        this.stick_start()
+        // this.abxy_end()
+        // this.abxy_start()
+        // this.stick_end()
+        // this.stick_start()
 
     }
     trigger_start(){
         if(this.controller2.gamepad){
             if(this.controller2.gamepad.buttons[0].pressed){
-                this.controller2.add(this.r_trigger)
+                this.r_trigger.children[0].material = new THREE.MeshBasicMaterial( { color: 'red' } );
+                this.r_trigger.children[1].material = new THREE.MeshBasicMaterial( { color: 'red' } );           
             }
     
         } 
         if(this.controller1.gamepad){
             if(this.controller1.gamepad.buttons[0].pressed){
-                    this.controller1.add(this.l_trigger)
+                this.l_trigger.children[0].material = new THREE.MeshBasicMaterial( { color: 'red' } );
+                this.l_trigger.children[1].material = new THREE.MeshBasicMaterial( { color: 'red' } );       
             }
         } 
     }
@@ -243,37 +264,49 @@ export default class Controllers
     trigger_end(){
         if(this.controller2.gamepad){
             if(!this.controller2.gamepad.buttons[0].pressed){
-                this.controller2.remove(this.r_trigger)
+                this.r_trigger.children[0].material = new THREE.MeshBasicMaterial( { color: 'white' } );
+                this.r_trigger.children[1].material = new THREE.MeshBasicMaterial( { color: 'white' } ); 
             }
     
         } 
         if(this.controller1.gamepad){
             if(!this.controller1.gamepad.buttons[0].pressed){
-                this.controller1.remove(this.l_trigger)
+                this.l_trigger.children[0].material = new THREE.MeshBasicMaterial( { color: 'white' } );
+                this.l_trigger.children[1].material = new THREE.MeshBasicMaterial( { color: 'white' } );  
             }
         }
     }
     squeeze_end(){
         if(this.controller2.gamepad){
             if(!this.controller2.gamepad.buttons[1].pressed){
-                this.controller2.remove(this.rsq)
+                this.rsq.children[0].material = new THREE.MeshBasicMaterial( { color: 'white' } );
+                this.rsq.children[1].material = new THREE.MeshBasicMaterial( { color: 'white' } );      
             }    
         } 
         if(this.controller1.gamepad){
             if(!this.controller1.gamepad.buttons[1].pressed){
-                this.controller1.remove(this.lsq)
+                this.lsq.children[0].material = new THREE.MeshBasicMaterial( { color: 'white' } );
+                this.lsq.children[1].material = new THREE.MeshBasicMaterial( { color: 'white' } );         
             }    
         } 
     }
     squeeze_start(){
+        // console.log("one")
         if(this.controller2.gamepad){
+            // console.log("two")
             if(this.controller2.gamepad.buttons[1].pressed){
-                this.controller2.add(this.rsq)
+                console.log("three")
+                console.log(this.rsq.children.length)
+                this.rsq.children[0].material = new THREE.MeshBasicMaterial( { color: 'red' } );
+                this.rsq.children[1].material = new THREE.MeshBasicMaterial( { color: 'red' } );         
             }    
         } 
         if(this.controller1.gamepad){
+            // console.log("four")
             if(this.controller1.gamepad.buttons[1].pressed){
-                this.controller1.add(this.lsq)
+                console.log("five")
+                this.lsq.children[0].material = new THREE.MeshBasicMaterial( { color: 'red' } );
+                this.lsq.children[1].material = new THREE.MeshBasicMaterial( { color: 'red' } );     
             }    
         } 
     }
