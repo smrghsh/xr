@@ -16,6 +16,7 @@ export default class Controllers
         this.renderer = this.experience.renderer
        
        
+
         this.ui_geom = new THREE.PlaneGeometry(0.03, 0.03); 
         this.ui_ma = new THREE.MeshBasicMaterial( { color: 'white' } ); 
        
@@ -46,6 +47,15 @@ export default class Controllers
         this.xp = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
         this.xp.position.set(0.07, 0, 0.06)
         this.xp.rotation.x -= Math.PI/2
+
+        this.lst = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
+        this.lst.position.set(-0.05, 0, -0.06)
+        this.lst.rotation.x -= Math.PI/2
+
+        this.rst = new THREE.Mesh( this.ui_geom, this.ui_ma ); 
+        this.rst.position.set(0.05, 0, -0.06)
+        this.rst.rotation.x -= Math.PI/2
+
 
 
 
@@ -84,6 +94,17 @@ export default class Controllers
         this.x_line.material.color = new THREE.Color('white')
         this.x_line.name = 'x_line';
 
+        this.lst_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( -0.05, 0, -0.06), new THREE.Vector3( -0.05, 0, -0.06)]);
+        this.lst_line = new THREE.LineSegments( this.lst_geom );
+        this.lst_line.material.color = new THREE.Color('white')
+        this.lst_line.name = 'lst_line';
+
+        this.rst_geom = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0.05, 0, -0.06), new THREE.Vector3( 0.05, 0, -0.06)]);
+        this.rst_line = new THREE.LineSegments( this.rst_geom );
+        this.rst_line.material.color = new THREE.Color('white')
+        this.rst_line.name = 'ls_line';
+
+
 
 
         this.l_trigger = new THREE.Group()
@@ -117,6 +138,14 @@ export default class Controllers
         this.y = new THREE.Group()
         this.y.add(this.y_line.clone())
         this.y.add(this.yp.clone())
+
+        this.lst = new THREE.Group()
+        this.lst.add(this.lst_line.clone())
+        this.lst.add(this.lst.clone())
+
+        this.rst = new THREE.Group()
+        this.rst.add(this.rst_line.clone())
+        this.rst.add(this.rst.clone())
 
         this.r_connection = false
         this.l_connection = false
@@ -192,6 +221,8 @@ export default class Controllers
         this.squeeze_start()
         this.abxy_end()
         this.abxy_start()
+        this.stick_end()
+        this.stick_start()
 
     }
     trigger_start(){
@@ -279,6 +310,42 @@ export default class Controllers
             }    
             if(this.controller1.gamepad.buttons[4].pressed){
                 this.controller1.add(this.x)
+            }
+        } 
+    }
+    stick_end(){
+        if(this.controller2.gamepad){
+            if(!this.controller2.gamepad.buttons[3].pressed){
+                this.controller2.remove(this.rst)
+            }    
+            if(this.controller2.gamepad.axes[3]){
+                this.controller2.remove(this.rst)
+            }
+        } 
+        if(this.controller1.gamepad){
+            if(!this.controller1.gamepad.buttons[3].pressed){
+                this.controller1.remove(this.lst)
+            }    
+            if(this.controller1.gamepad.axes[3]){
+                this.controller1.remove(this.lst)
+            }
+        } 
+    }
+    stick_start(){
+        if(this.controller2.gamepad){
+            if(this.controller2.gamepad.buttons[3].pressed){
+                this.controller2.add(this.rst)
+            }  
+            if(!this.controller2.gamepad.axes[3]){
+                this.controller2.add(this.rst)
+            }     
+        } 
+        if(this.controller1.gamepad){
+            if(this.controller1.gamepad.buttons[3].pressed){
+                this.controller1.add(this.lst)
+            }    
+            if(this.controller1.gamepad.axes[3]){
+                this.controller1.add(this.lst)
             }
         } 
     }
