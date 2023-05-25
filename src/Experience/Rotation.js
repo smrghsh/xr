@@ -41,7 +41,7 @@ export default class Rotation
             console.log("Enabling rotate: ", this.start_x, this.start_y)
             console.log('intersect cntrl & box: ', this.cubeBB.distanceToPoint(this.controller2.position))
 
-            this.cubeBB.update();
+            this.cubeBB.copy( this.cube.geometry.boundingBox ).applyMatrix4( this.cube.matrixWorld );
 
             console.log('cube bb', this.cubeBB)
 
