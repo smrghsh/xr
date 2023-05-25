@@ -41,7 +41,7 @@ export default class Rotation
             this.start_z = this.controller2.position.z;
 
             console.log("Enabling rotate: ", this.start_x, this.start_y)
-            console.log('intersect cntrl & box: ', this.controllerBB.intersectsBox(this.cubeBB))
+            console.log('intersect cntrl & box: ', this.cubeBB.distanceToPoint(this.controller2.position))
             console.log(this.controllerBB)
             console.log(this.cubeBB)
 
@@ -61,7 +61,7 @@ export default class Rotation
     }
 
     update(){
-        if(this.enable_rotate && this.controllerBB.intersectsBox(this.cubeBB)){
+        if(this.enable_rotate && this.cubeBB.distanceToPoint(this.controller2.position) < 0.2){
             /*
             let start_x_r = this.start_x - this.controller2.rotation.x
             let start_y_r = this.start_y - this.controller2.rotation.y
