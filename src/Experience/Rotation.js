@@ -30,8 +30,6 @@ export default class Rotation
 
         this.controller2 = this.renderer.instance.xr.getController( 1 );
 
-        this.controllerBB = new THREE.Box3().setFromObject(this.controller2);
-
 
         this.controller2.addEventListener( 'selectstart', ( event )=> {
             //this.start_x = this.controller2.rotation.x;
@@ -42,8 +40,10 @@ export default class Rotation
 
             console.log("Enabling rotate: ", this.start_x, this.start_y)
             console.log('intersect cntrl & box: ', this.cubeBB.distanceToPoint(this.controller2.position))
-            console.log(this.controllerBB)
-            console.log(this.cubeBB)
+
+            this.cubeBB.update();
+
+            console.log('cube bb', this.cubeBB)
 
             this.startingCubePos = new THREE.Vector3(this.start_x, this.start_y, this.start_z);
             this.startingCubePos.sub(this.cube.position);
