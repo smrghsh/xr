@@ -318,7 +318,7 @@ export default class Controllers
             if(!this.controller2.gamepad.buttons[3].pressed){
                 this.controller2.remove(this.rst)
             }    
-            if(this.controller2.gamepad.axes[3]){
+            if(this.controller2.gamepad.axes[3] == 0){
                 this.controller2.remove(this.rst)
             }
         } 
@@ -326,7 +326,7 @@ export default class Controllers
             if(!this.controller1.gamepad.buttons[3].pressed){
                 this.controller1.remove(this.lst)
             }    
-            if(this.controller1.gamepad.axes[3]){
+            if(this.controller1.gamepad.axes[3] == 0){
                 this.controller1.remove(this.lst)
             }
         } 
@@ -336,7 +336,7 @@ export default class Controllers
             if(this.controller2.gamepad.buttons[3].pressed){
                 this.controller2.add(this.rst)
             }  
-            if(!this.controller2.gamepad.axes[3]){
+            if(this.controller2.gamepad.axes[3] != 0){
                 this.controller2.add(this.rst)
             }     
         } 
@@ -344,7 +344,7 @@ export default class Controllers
             if(this.controller1.gamepad.buttons[3].pressed){
                 this.controller1.add(this.lst)
             }    
-            if(this.controller1.gamepad.axes[3]){
+            if(this.controller1.gamepad.axes[3] != 0){
                 this.controller1.add(this.lst)
             }
         } 
