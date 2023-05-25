@@ -10,8 +10,7 @@ import sources from "./sources.js";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import Controllers from "./Controllers.js";
 import Hands from "./Hands.js";
-import Locomotion from './Locomotion.js';
-
+import Locomotion from "./Locomotion.js";
 
 let instance = null;
 
@@ -59,13 +58,13 @@ export default class Experience {
     this.renderer.instance.xr.enabled = true;
     document.body.appendChild(VRButton.createButton(this.renderer.instance));
     this.renderer.instance.setAnimationLoop(() => {
+      //need to call this inside an update loop
+      Handy.update();
       this.controllers.update();
       // tick();
       // this.locomotion.teleportVR.update(this.locomotion.elevationMeshList);
       this.renderer.instance.render(this.scene, this.camera.instance);
     });
-
-
 
     this.raycaster = new THREE.Raycaster();
     this.mouse = new THREE.Vector2();
