@@ -36,6 +36,10 @@ export default class Rotation
             this.start_x = this.controller2.rotation.x;
             this.start_y = this.controller2.rotation.y;
 
+            this.box_x = this.cube.rotation.x
+            this.box_y = this.cube.rotation.y
+            this.box_z = this.cube.rotation.z
+
             console.log("Enabling rotate: ", this.start_x, this.start_y)
             console.log('intersect cntrl & box: ', this.cubeBB.distanceToPoint(this.controller2.position))
 
@@ -70,9 +74,9 @@ export default class Rotation
             let start_y_r = this.start_y - this.controller2.rotation.y
             //this.cube.rotation.x += start_x_r * .6; // Set cube rotation to totation * .6
             //this.cube.rotation.y += start_y_r * .6;
-            this.cube.rotation.x = this.controller2Grip.rotation.x
-            this.cube.rotation.y = this.controller2Grip.rotation.y
-            this.cube.rotation.z = this.controller2Grip.rotation.z
+            this.cube.rotation.x = this.controller2Grip.rotation.x - this.box_x
+            this.cube.rotation.y = this.controller2Grip.rotation.y - this.box_y
+            this.cube.rotation.z = this.controller2Grip.rotation.z - this.box_z
 
             this.start_x = this.controller2.rotation.x // Set starting rotation to cur rotation
             this.start_y = this.controller2.rotation.y
