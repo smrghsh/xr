@@ -3,10 +3,9 @@ import Experience from './Experience.js'
 
 export default class Raycaster
 {
-    constructor()
+    constructor(controller)
     {
         this.experience = new Experience()
-        this.canvas = this.experience.canvas
 
         this.geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
 
@@ -14,6 +13,11 @@ export default class Raycaster
         this.line.scale.z = 5;  
         
         this.raycaster = new THREE.Raycaster();
+
+        this.controller.add( this.line.clone() );
+
+
+
 
     }
 }
