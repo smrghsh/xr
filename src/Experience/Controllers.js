@@ -139,13 +139,13 @@ export default class Controllers
         this.y.add(this.y_line.clone())
         this.y.add(this.yp.clone())
 
-        this.lst = new THREE.Group()
-        this.lst.add(this.lst_line.clone())
-        this.lst.add(this.lst.clone())
+        this.lsti = new THREE.Group()
+        this.lsti.add(this.lst_line.clone())
+        this.lsti.add(this.lst.clone())
 
-        this.rst = new THREE.Group()
-        this.rst.add(this.rst_line.clone())
-        this.rst.add(this.rst.clone())
+        this.rsti = new THREE.Group()
+        this.rsti.add(this.rst_line.clone())
+        this.rsti.add(this.rst.clone())
 
         this.r_connection = false
         this.l_connection = false
@@ -316,36 +316,36 @@ export default class Controllers
     stick_end(){
         if(this.controller2.gamepad){
             if(!this.controller2.gamepad.buttons[3].pressed){
-                this.controller2.remove(this.rst)
+                this.controller2.remove(this.rsti)
             }    
             if(this.controller2.gamepad.axes[3] == 0){
-                this.controller2.remove(this.rst)
+                this.controller2.remove(this.rsti)
             }
         } 
         if(this.controller1.gamepad){
             if(!this.controller1.gamepad.buttons[3].pressed){
-                this.controller1.remove(this.lst)
+                this.controller1.remove(this.lsti)
             }    
             if(this.controller1.gamepad.axes[3] == 0){
-                this.controller1.remove(this.lst)
+                this.controller1.remove(this.lsti)
             }
         } 
     }
     stick_start(){
         if(this.controller2.gamepad){
             if(this.controller2.gamepad.buttons[3].pressed){
-                this.controller2.add(this.rst)
+                this.controller2.add(this.rsti)
             }  
             if(this.controller2.gamepad.axes[3] != 0){
-                this.controller2.add(this.rst)
+                this.controller2.add(this.rsti)
             }     
         } 
         if(this.controller1.gamepad){
             if(this.controller1.gamepad.buttons[3].pressed){
-                this.controller1.add(this.lst)
+                this.controller1.add(this.lsti)
             }    
             if(this.controller1.gamepad.axes[3] != 0){
-                this.controller1.add(this.lst)
+                this.controller1.add(this.lsti)
             }
         } 
     }
