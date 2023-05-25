@@ -11,7 +11,6 @@ import { VRButton } from 'three/examples/jsm/webxr/VRButton.js'
 import Controllers from './Controllers.js'
 
 /* Samantha's import */
-import { createText } from 'three/examples/jsm/webxr/Text2D.js';
 import Menu from './Menu.js'
 
 let INTERSECTED
