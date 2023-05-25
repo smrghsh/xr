@@ -313,73 +313,73 @@ export default class Controllers
     abxy_end(){
         if(this.controller2.gamepad){
             if(!this.controller2.gamepad.buttons[5].pressed){
-                this.controller2.remove(this.b)
-            }    
+                this.b.children[0].material = new THREE.MeshBasicMaterial( { color: 'white' } );
+                this.b.children[1].material = new THREE.MeshBasicMaterial( { color: 'white' } );             }    
             if(!this.controller2.gamepad.buttons[4].pressed){
-                this.controller2.remove(this.a)
-            }
+                this.a.children[0].material = new THREE.MeshBasicMaterial( { color: 'white' } );
+                this.a.children[1].material = new THREE.MeshBasicMaterial( { color: 'white' } );            }
         } 
         if(this.controller1.gamepad){
             if(!this.controller1.gamepad.buttons[5].pressed){
-                this.controller1.remove(this.y)
-            }    
+                this.y.children[0].material = new THREE.MeshBasicMaterial( { color: 'white' } );
+                this.y.children[1].material = new THREE.MeshBasicMaterial( { color: 'white' } );            }    
             if(!this.controller1.gamepad.buttons[4].pressed){
-                this.controller1.remove(this.x)
-            }
+                this.x.children[0].material = new THREE.MeshBasicMaterial( { color: 'white' } );
+                this.x.children[1].material = new THREE.MeshBasicMaterial( { color: 'white' } );            }
         } 
     }
     abxy_start(){
         if(this.controller2.gamepad){
             if(this.controller2.gamepad.buttons[5].pressed){
-                this.controller2.add(this.b)
-            }  
+                this.b.children[0].material = new THREE.MeshBasicMaterial( { color: 'red' } );
+                this.b.children[1].material = new THREE.MeshBasicMaterial( { color: 'red' } );            }  
             if(this.controller2.gamepad.buttons[4].pressed){
-                this.controller2.add(this.a)
-            }     
+                this.a.children[0].material = new THREE.MeshBasicMaterial( { color: 'red' } );
+                this.a.children[1].material = new THREE.MeshBasicMaterial( { color: 'red' } );            }     
         } 
         if(this.controller1.gamepad){
             if(this.controller1.gamepad.buttons[5].pressed){
-                this.controller1.add(this.y)
-            }    
+                this.y.children[0].material = new THREE.MeshBasicMaterial( { color: 'red' } );
+                this.y.children[1].material = new THREE.MeshBasicMaterial( { color: 'red' } );            }    
             if(this.controller1.gamepad.buttons[4].pressed){
-                this.controller1.add(this.x)
-            }
+                this.x.children[0].material = new THREE.MeshBasicMaterial( { color: 'red' } );
+                this.x.children[1].material = new THREE.MeshBasicMaterial( { color: 'red' } );            }
         } 
     }
     stick_end(){
         if(this.controller2.gamepad){
             if(!this.controller2.gamepad.buttons[3].pressed){
-                this.controller2.remove(this.rsti)
-            }    
+                this.rsti.children[0].material = new THREE.MeshBasicMaterial( { color: 'white' } );
+                this.rsti.children[1].material = new THREE.MeshBasicMaterial( { color: 'white' } );            }    
             if(this.controller2.gamepad.axes[3] == 0){
-                this.controller2.remove(this.rsti)
-            }
+                this.rsti.children[0].material = new THREE.MeshBasicMaterial( { color: 'white' } );
+                this.rsti.children[1].material = new THREE.MeshBasicMaterial( { color: 'white' } );             }
         } 
         if(this.controller1.gamepad){
             if(!this.controller1.gamepad.buttons[3].pressed){
-                this.controller1.remove(this.lsti)
-            }    
+                this.lsti.children[0].material = new THREE.MeshBasicMaterial( { color: 'white' } );
+                this.lsti.children[1].material = new THREE.MeshBasicMaterial( { color: 'white' } );             }    
             if(this.controller1.gamepad.axes[3] == 0){
-                this.controller1.remove(this.lsti)
-            }
+                this.lsti.children[0].material = new THREE.MeshBasicMaterial( { color: 'white' } );
+                this.lsti.children[1].material = new THREE.MeshBasicMaterial( { color: 'white' } );             }
         } 
     }
     stick_start(){
         if(this.controller2.gamepad){
             if(this.controller2.gamepad.buttons[3].pressed){
-                this.controller2.add(this.rsti)
-            }  
+                this.rsti.children[0].material = new THREE.MeshBasicMaterial( { color: 'red' } );
+                this.rsti.children[1].material = new THREE.MeshBasicMaterial( { color: 'red' } );             }  
             if(this.controller2.gamepad.axes[3] != 0){
-                this.controller2.add(this.rsti)
-            }     
+                this.rsti.children[0].material = new THREE.MeshBasicMaterial( { color: 'red' } );
+                this.rsti.children[1].material = new THREE.MeshBasicMaterial( { color: 'red' } );             }     
         } 
         if(this.controller1.gamepad){
             if(this.controller1.gamepad.buttons[3].pressed){
-                this.controller1.add(this.lsti)
-            }    
+                this.lsti.children[0].material = new THREE.MeshBasicMaterial( { color: 'red' } );
+                this.lsti.children[1].material = new THREE.MeshBasicMaterial( { color: 'red' } );             }    
             if(this.controller1.gamepad.axes[3] != 0){
-                this.controller1.add(this.lsti)
-            }
+                this.lsti.children[0].material = new THREE.MeshBasicMaterial( { color: 'red' } );
+                this.lsti.children[1].material = new THREE.MeshBasicMaterial( { color: 'red' } );            }
         } 
     }
 }
