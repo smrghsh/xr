@@ -70,10 +70,15 @@ export default class Rotation
             let start_y_r = this.start_y - this.controller2.rotation.y
             //this.cube.rotation.x += start_x_r * .6; // Set cube rotation to totation * .6
             //this.cube.rotation.y += start_y_r * .6;
-            this.cube.rotation.x = this.controller2Grip.rotation.x
-            this.cube.rotation.y = this.controller2Grip.rotation.y
-            this.cube.rotation.z = this.controller2Grip.rotation.z
 
+            // Store the initial rotation of the cube
+            const initialRotation = this.cube.rotation.clone();
+            
+            // Update the cube's rotation based on the controller's rotation
+            this.cube.rotation.x = initialRotation.x + this.controller2Grip.rotation.x;
+            this.cube.rotation.y = initialRotation.y + this.controller2Grip.rotation.y;
+            this.cube.rotation.z = initialRotation.z + this.controller2Grip.rotation.z;
+            
             this.start_x = this.controller2.rotation.x // Set starting rotation to cur rotation
             this.start_y = this.controller2.rotation.y
             
