@@ -50,6 +50,9 @@ export default class Rotation
 
             this.enable_rotate = true;
             console.log(this.controller2.position.distanceTo(this.cube.position));
+
+            this.initialRotation = this.cube.rotation;
+
         
         });
         this.controller2.addEventListener( 'selectend', ( event )=> {
@@ -72,21 +75,11 @@ export default class Rotation
             //this.cube.rotation.y += start_y_r * .6;
 
             // Store the initial rotation of the cube
-            const initialRotation = this.cube.rotation.clone();
-
-            // Convert the initial rotation to a quaternion
-            const initialQuaternion = new THREE.Quaternion().setFromEuler(initialRotation);
-
+            
             // Update the cube's rotation based on the controller's rotation
-            const controllerRotation = this.controller2Grip.rotation.clone();
-            const controllerQuaternion = new THREE.Quaternion().setFromEuler(controllerRotation);
-            const newQuaternion = initialQuaternion.multiply(controllerQuaternion);
-
-            // Convert the new quaternion to Euler angles
-            const newRotation = new THREE.Euler().setFromQuaternion(newQuaternion);
-
-            // Apply the new rotation to the cube
-            this.cube.rotation.copy(newRotation);
+            this.cube.rotation.x = this.initialRotation.x + this.controller2Grip.rotation.x;
+            this.cube.rotation.y = this.initialRotation.y + this.controller2Grip.rotation.y;
+            this.cube.rotation.z = this.initialRotation.z + this.controller2Grip.rotation.z;
             
             this.start_x = this.controller2.rotation.x // Set starting rotation to cur rotation
             this.start_y = this.controller2.rotation.y
