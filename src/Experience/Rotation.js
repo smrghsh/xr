@@ -73,11 +73,20 @@ export default class Rotation
 
             // Store the initial rotation of the cube
             const initialRotation = this.cube.rotation.clone();
-            
+
+            // Convert the initial rotation to a quaternion
+            const initialQuaternion = new THREE.Quaternion().setFromEuler(initialRotation);
+
             // Update the cube's rotation based on the controller's rotation
-            this.cube.rotation.x = initialRotation.x + this.controller2Grip.rotation.x;
-            this.cube.rotation.y = initialRotation.y + this.controller2Grip.rotation.y;
-            this.cube.rotation.z = initialRotation.z + this.controller2Grip.rotation.z;
+            const controllerRotation = this.controller2Grip.rotation.clone();
+            const controllerQuaternion = new THREE.Quaternion().setFromEuler(controllerRotation);
+            const newQuaternion = initialQuaternion.multiply(controllerQuaternion);
+
+            // Convert the new quaternion to Euler angles
+            const newRotation = new THREE.Euler().setFromQuaternion(newQuaternion);
+
+            // Apply the new rotation to the cube
+            this.cube.rotation.copy(newRotation);
             
             this.start_x = this.controller2.rotation.x // Set starting rotation to cur rotation
             this.start_y = this.controller2.rotation.y
