@@ -129,6 +129,8 @@ export default class Experience
         // this.controllers.raycaster.setFromCamera( this.mouse, this.camera.instance );
         this.intersects = this.controllers.controller1.raycasting.raycaster.intersectObjects( this.torusKnot);
         console.log("this intersects",this.intersects)
+        this.controllers.controller1.cleanIntersected()
+        this.controllers.controller2.cleanIntersected()
         
         //Samantha's Edits Pt 2//
 
