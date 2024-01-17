@@ -1,8 +1,5 @@
 import * as THREE from "three";
 import Experience from "./Experience.js";
-//import FlickRing shaders
-import flickRingVertexShader from "../shaders/FlickRing/vertex.glsl";
-import flickRingFragmentShader from "../shaders/FlickRing/fragment.glsl";
 import { XRControllerModelFactory } from "three/examples/jsm/webxr/XRControllerModelFactory.js";
 
 export default class Controllers {
