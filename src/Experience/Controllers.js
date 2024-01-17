@@ -82,7 +82,6 @@ export default class Controllers {
         ) {
           if (this.controller2.gamepad.buttons[4].pressed) {
             console.log("A pressed");
-            this.experience.world.nextVideo();
           } else {
             console.log("A released");
           }
@@ -95,7 +94,6 @@ export default class Controllers {
         ) {
           if (this.controller2.gamepad.buttons[5].pressed) {
             console.log("B pressed");
-            this.experience.world.reset();
           } else {
             console.log("B released");
           }
