@@ -1,7 +1,6 @@
-*
-{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
 /* html,
@@ -10,21 +9,32 @@ body
     overflow: hidden;
 } */
 
-.webgl
-{
-    /* position: fixed; */
-    /* top: 0;
+.webgl {
+  /* position: fixed; */
+  /* top: 0;
     left: 0; */
-    outline: none;
+  outline: none;
 }
 #settings {
-    width: 100vw;
-    text-align: center;
-    margin: .1em 0;
-    padding: 0 0;
-    
+  width: 100vw;
+  text-align: center;
+  margin: 0.1em 0;
+  padding: 0 0;
 }
 #settings > button {
-    font-size: 2em;
-    margin: 10px;
+  font-size: 2em;
+  margin: 10px;
+}
+h2 {
+  font-size: 1.2em;
+  /* margin: 10px; */
+}
+p {
+  /* font-size: 2em; */
+  font-size: 0.87em;
+  margin: 10px;
+  line-height: 1em;
+}
+a {
+  color: pink;
 }

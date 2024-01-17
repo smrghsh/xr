@@ -1,17 +1,14 @@
 import * as THREE from "three";
 import Debug from "./Utils/Debug.js";
 import Sizes from "./Utils/Sizes.js";
-import Time from "./Utils/Time.js";
 import Resources from "./Utils/Resources.js";
+import Mouse from "./Utils/Mouse.js";
 import Camera from "./Camera.js";
 import Renderer from "./Renderer.js";
 import World from "./World/World.js";
 import sources from "./sources.js";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import Controllers from "./Controllers.js";
-import Hands from "./Hands.js";
-import Locomotion from './Locomotion.js';
-
 
 let instance = null;
 
@@ -24,6 +21,14 @@ export default class Experience {
     // Global access
     window.experience = this;
     this.canvas = canvas;
+
+    this.sizes = new Sizes();
+    this.scene = new THREE.Scene();
+    this.resources = new Resources(sources);
+    this.world = new World();
+    this.camera = new Camera();
+    this.renderer = new Renderer();
+
     this.debug = new Debug();
     this.sampleBoolean = true;
     this.sampleNumber = 5;
@@ -32,40 +37,44 @@ export default class Experience {
       const debugObject = {
         sampleBoolean: this.sampleBoolean,
         sampleNumber: this.sampleNumber,
+        Next: function () {
+          console.log("Next");
+          window.experience.world.flickUp();
+        },
+        Mark: function () {
+          console.log("Mark");
+          window.experience.world.mark();
+        },
+        SwitchMode: function () {
+          console.log("SwitchMode");
+          window.experience.world.flickRight();
+        },
       };
-      this.debugFolder.add(debugObject, "sampleBoolean").onChange((value) => {
-        this.sampleBoolean = value;
-        console.log(this.sampleBoolean);
-      });
-      this.debugFolder
-        .add(debugObject, "sampleNumber")
-        .min(0.5)
-        .max(15)
-        .onChange((value) => {
-          this.sampleNumber = value;
-          console.log(this.sampleNumber);
-        });
+      // this.debugFolder.add(debugObject, "flickLeft");
     }
-    this.sizes = new Sizes();
-    this.time = new Time();
-    this.lastUpdated = this.time.current;
-    this.scene = new THREE.Scene();
-    this.resources = new Resources(sources);
-    this.world = new World();
-    this.camera = new Camera();
-    this.renderer = new Renderer();
-    this.controllers = new Controllers();
-    this.hands = new Hands();
+
+    window.addEventListener("click", () => {
+      if (this.INTERSECTED) {
+        // do something here if there is something in this.INTERSECTED
+      }
+    });
+    this.mouse = new Mouse();
+
+    /**
+     * Clock
+     */
+    this.clock = new THREE.Clock();
+    this.clock.start();
+
     this.renderer.instance.xr.enabled = true;
     document.body.appendChild(VRButton.createButton(this.renderer.instance));
     this.renderer.instance.setAnimationLoop(() => {
-      this.controllers.update();
       // tick();
-      // this.locomotion.teleportVR.update(this.locomotion.elevationMeshList);
+      this.world.update();
       this.renderer.instance.render(this.scene, this.camera.instance);
     });
 
-
+    this.controllers = new Controllers();
 
     this.raycaster = new THREE.Raycaster();
     this.mouse = new THREE.Vector2();
@@ -84,9 +93,6 @@ export default class Experience {
       this.camera.resize();
       this.renderer.resize();
     });
-    this.time.on("tick", () => {
-      this.update();
-    });
   }
 
   resize() {
@@ -95,32 +101,10 @@ export default class Experience {
   }
   update() {
     this.camera.update();
-    // this.renderer.update()
     this.world.update();
-    // this.world.circles.undulate(this.time.elapsed)
-    // this.world.hypercube.wub(this.time.elapsed)
-    //https://github.com/mrdoob/three.js/blob/master/examples/webgl_interactive_cubes.html
 
     //change this to be controller if controller is active
     this.raycaster.setFromCamera(this.mouse, this.camera.instance);
-    // console.log(this.mouse)
-    // TODO, make raycaster its own class
-    // const intersects = this.raycaster.intersectObjects( this.scene.children, false );
-    // if ( intersects.length > 0 ) {
-    //     if ( this.INTERSECTED != intersects[ 0 ].object ) {
-    //         if ( this.INTERSECTED ) this.INTERSECTED.material.color.setHex( this.INTERSECTED.currentHex );
-    //         this.INTERSECTED = intersects[ 0 ].object;
-    //         this.INTERSECTED.currentHex = this.INTERSECTED.material.color.getHex();
-    //         this.INTERSECTED.material.color.setHex( 0xff0000 );
-
-    //     }
-    // } else {
-
-    //     if ( this.INTERSECTED ) this.INTERSECTED.material.color.setHex( this.INTERSECTED.currentHex );
-
-    //     this.INTERSECTED = null;
-
-    // }
   }
   destroy() {
     this.sizes.off("resize");

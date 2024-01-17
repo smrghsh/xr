@@ -1,5 +1,5 @@
 {
-  "name": "threejs-journey-exercise",
+  "name": "XR",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "lil-gui": "^0.17.0",
-    "teleportvr": "^3.0.4",
     "three": "^0.148.0"
   }
 }

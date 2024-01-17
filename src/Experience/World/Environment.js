@@ -7,24 +7,7 @@ export default class Environment {
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
     this.debug = this.experience.debug;
-
-    this.parameter = {
-      color: 0x000117,
-    };
-
-    if (this.debug.active) {
-      this.debugFolder = this.debug.ui.addFolder("environment");
-      const debugObject = {
-        color: this.parameter.color,
-      };
-      this.debugFolder.addColor(debugObject, "color").onChange((value) => {
-        this.scene.background.set(value);
-      });
-    }
-
-    console.log(this.parameter.color);
-    this.scene.background = new THREE.Color(this.parameter.color);
-
+    this.scene.background = new THREE.Color("black");
     // this.setSunLight()
     this.setAmbientLight();
     // this.setEnvironmentMap()
@@ -45,6 +28,7 @@ export default class Environment {
   //     this.scene.add(this.sunLight)
 
   //     // Debug
+  //     if(this.debug.active)
   //     {
   //         this.debugFolder
   //             .add(this.sunLight, 'intensity')
