@@ -1,4 +1,6 @@
 import glsl from "vite-plugin-glsl";
+import wasm from "vite-plugin-wasm";
+import topLevelAwait from "vite-plugin-top-level-await";
 
 const isCodeSandbox =
   "SANDBOX_URL" in process.env || "CODESANDBOX_HOST" in process.env;
@@ -29,5 +31,5 @@ export default {
       },
     ],
   },
-  plugins: [glsl()],
+  plugins: [wasm(), topLevelAwait(), glsl()],
 };

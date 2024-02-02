@@ -3,7 +3,7 @@ import Experience from "../Experience.js";
 import Environment from "./Environment.js";
 import Floor from "./Floor.js";
 import Stars from "./Stars.js";
-import SamirCube from "./SamirCube.js";
+import Balloons from "./Balloons.js";
 // import Hexagons from "./Hexagons.js";
 
 export default class World {
@@ -24,14 +24,14 @@ export default class World {
       this.stars = new Stars();
       // this.hexagons = new Hexagons();
       this.environment = new Environment();
-      this.samirCube = new SamirCube();
+      this.balloons = new Balloons();
       this.ready = true;
     });
   }
   update() {
     if (this.ready) {
       this.stars.update();
-      this.samirCube.update();
+      this.balloons.update();
     }
   }
 }
