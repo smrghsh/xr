@@ -29,7 +29,7 @@ export default class Balloons {
     this.colliderDesc = RAPIER.ColliderDesc.ball(0.5, 0.5, 0.5)
       .setDensity(1.3)
       .setFriction(0.8)
-      .setRestitution(0.8);
+      .setRestitution(2);
     this.collider = this.world.createCollider(
       this.colliderDesc,
       this.rigidBody
@@ -60,7 +60,7 @@ export default class Balloons {
 
     // Get and print the rigid-body's position.
     let position = this.rigidBody.translation();
-    console.log("Rigid-body position: ", position.x, position.y, position.z);
+    // console.log("Rigid-body position: ", position.x, position.y, position.z);
 
     // Update the balloon's position
     this.balloon.position.x = position.x;
